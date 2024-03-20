@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Thesis;
+use App\Models\ThesisAdvisor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -15,14 +16,29 @@ class ThesisController extends Controller
     public function index(Request $request)
     {
         $thesises = Thesis::query()
+            // ->with(['Teacher_id']) 
+
             ->when($request->input('keyword'), fn ($query)
             =>$query->where('Department', 'like', "%" . $request->input('keyword') . "%"))
+
+            // ->when($request->input('Teacher_id'), fn ($query)
+            // =>$query->where('Teacher_id', $request->input('Teacher_id')))
+
             ->paginate(3)
             ->withQueryString();
+
+        // $thesisesAdvisors = ThesisAdvisor::query()
+        //     ->select('n', 'Advisor')
+        //     ->orderBy('Advisor')  
+        //     ->get();  
     
         return Inertia::render('Thesis/Index', [
             'thesises' => $thesises,
-            'filters' => $request->all('keyword'),
+            // 'thesisAdvisors' => $thesisesAdvisors,
+            'filters' => $request->all(
+                // 'n',
+                'keyword'
+            ),
         ]);
     }
     
@@ -32,7 +48,13 @@ class ThesisController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Thesis/Create');
+        // $thesisesAdvisors = ThesisAdvisor::query()
+        //     ->select('n', 'Advisor')
+        //     ->orderBy('Advisor')  
+        //     ->get();
+        return Inertia::render('Thesis/Create', [
+            // 'thesisAdvisors' => $thesisesAdvisors,
+        ]);
     }
 
     /**
@@ -63,6 +85,7 @@ class ThesisController extends Controller
             'Objective_Khmer' => 'required',
             'Summary' => 'required',
             'Submit_Date' => 'required',
+            // 'Teacher_id' => 'required|exists:thesisAdvisors,n',
             'Teacher_id' => 'required',
             'Defend_Date' => 'required',
             'Book_Score' => 'required',
@@ -125,8 +148,13 @@ class ThesisController extends Controller
      */
     public function edit(Thesis $thesis)
     {
+        // $thesisesAdvisors = ThesisAdvisor::query()
+        //     ->select('n', 'Advisor')
+        //     ->orderBy('Advisor')  
+        //     ->get();    
         return Inertia::render('Thesis/Create', [
-            'thesis' => $thesis
+            'thesis' => $thesis, 
+            // 'thesisAdvisors' => $thesisesAdvisors
         ]);
     }
     /**

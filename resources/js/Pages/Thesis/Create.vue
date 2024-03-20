@@ -6,6 +6,10 @@ import { MoveLeft } from 'lucide-vue-next';
 import Swal from 'sweetalert2'
 
 const props = defineProps<{
+    // thesisAdvisors: {
+    //     n: number;
+    //     Advisor: string;
+    // }[];
     thesis?: ThesisType;
 }>();
 const form = useForm({

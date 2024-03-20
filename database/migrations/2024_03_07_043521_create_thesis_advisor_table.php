@@ -12,11 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('thesis_advisor', function (Blueprint $table) {
-            $table->string('Academic_year')->primary();
+            $table->string('Academic_year');
+            $table->string('Advisor');
+            $table->unique(['Academic_year', 'Advisor']);
+            
+            // $table->string('Academic_year')->primary();
             $table->integer('n');
             $table->string('College')->nullable();
             $table->string('Department')->nullable();
-            $table->string('Advisor');
+            // $table->string('Advisor');
 
             $table->timestamps();
         });
