@@ -82,30 +82,30 @@ const onDelete = async (N: number) => {
                 <table class="table table-lg">
                     <thead>
                         <tr>
-                            <th>N</th>
-                            <th>Thesis_No</th>
-                            <th>Thesis_Group</th>
-                            <th>Academic_Year</th>
+                            <th>ID</th>
+                            <th>Thesis No</th>
+                            <th>Thesis Group</th>
+                            <th>Academic Year</th>
                             <th>Department</th>
                             <th>Major</th>
                             <th>Year</th>
                             <th>Batch</th>
                             <th>Session</th>
                             <th>Organizaition</th>
-                            <th>Organization_Type</th>
-                            <th>Location</th>
-                            <th>Organization_Phone</th>
+                            <th>Organization Type</th>
+                            <th>Organization Location</th>
+                            <th>Organization Phone</th>
                             <th>Title</th>
-                            <th>Title_Khmer</th>
+                            <th>Title Khmer</th>
                             <th>Objective</th>
-                            <th>Objective_Khmer</th>
+                            <th>Objective Khmer</th>
                             <th>Summary</th>
-                            <th>Submit_Date</th>
-                            <th>Teacher_id</th>
-                            <th>Defend_Date</th>
-                            <th>Book_Score</th>
-                            <th>Defend_time</th>
-                            <th>Submit_book</th>
+                            <th>Submit Date</th>
+                            <th>Teacher id</th>
+                            <th>Defend Date</th>
+                            <th>Book Score</th>
+                            <th>Defend time</th>
+                            <th>Submit book</th>
                             <th>Building</th>
                             <th>Room</th>
                             <th>Actions</th>
