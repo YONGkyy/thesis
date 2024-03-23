@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { useToggleSidebar } from "@/Stores/useToggleSidebar";
 import TheSidebarItem from "@/Components/Layout/TheSidebarItem.vue";
+// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+// import { faMyIcon } from '@awesome.me/kit-KIT_CODE/icons/kit/custom';
 // import { NotebookPen } from 'lucide-vue-next';
+
 
 const sidebar = useToggleSidebar();
 </script>
 <template>
     <div class="flex print:hidden">
+       
 
         <!-- Backdrop -->
         <div
@@ -39,20 +43,18 @@ const sidebar = useToggleSidebar();
                     <div
                         class="mx-2 text-md font-semibold text-center text-white"
                     >
-                        Thesis System Management
+                    <font-awesome-icon :icon="['fas', 'school']" />Thesis System Management
                 </div>
             </div>
             </div>
 
             <nav class="mt-8">
-
+               
                 <TheSidebarItem
-                
                     title="Dashboard"
                     :link="route('dashboard')"
                     :is-active="$page.component === 'Dashboard'"
                 />
-
                 
                 <TheSidebarItem
                 title="Thesis"
@@ -61,7 +63,6 @@ const sidebar = useToggleSidebar();
                
                 />
                 
-               
                 <TheSidebarItem
                     title="ThesisAdvisor"
                     :link="route('thesisAdvisor.index')"

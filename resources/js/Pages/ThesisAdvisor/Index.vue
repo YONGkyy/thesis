@@ -169,7 +169,7 @@ const onDelete = async (Academic_year: string) => {
                 <h2 class="text-2xl font-bold">ThesisAdvisor Management</h2>
                 <div class="mt-4">
                     <div class="bg-base-100 p-2 rounded-xl flex gap-2 items-center">
-                        <Link :href="route('thesisAdvisor.create')" class="btn btn-primary">New</Link>
+                        <!-- <Link :href="route('thesisAdvisor.create')" class="btn btn-info">New</Link> -->
                         <input 
                             v-model="filterForm.keyword"
                             type="text" 
@@ -181,7 +181,7 @@ const onDelete = async (Academic_year: string) => {
                 </div>
             </div>
             <div class="bg-base-100 rounded-xl overflow-x-auto">
-                <table class="table table-lg">
+                <table class="table table-2xl">
                     <thead>
                         <tr>
                             <th>Academic Year</th>
@@ -225,7 +225,7 @@ const onDelete = async (Academic_year: string) => {
                         v-for="link in thesisAdvisors.links" 
                         :href="link.url ?? '#'"
                         class="join-item btn"
-                        :class="{ 'btn-primary': link.active }">
+                        :class="{ 'btn-info': link.active }">
                         <span v-html="link.label"></span>
                     </Link>
                 </div>

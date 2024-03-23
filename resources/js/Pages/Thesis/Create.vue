@@ -73,24 +73,27 @@ const onSave = () => {
 
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">ID</label> -->
-                            <input type="text" placeholder="ID" 
-                            className="input input-bordered input-info w-full max-w-xs" />
+                            <input v-model="form.N" placeholder="ID"  
+                            class="input input-info w-full"
+                                :class="{ 'input-error': form.errors.N }" />
                             <div v-if="form.errors.N" class="text-error">
                                 {{ form.errors.N }}
                             </div>
                         </div>
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">Thesis No</label> -->
-                            <input type="text" placeholder="Thesis No" 
-                            className="input input-bordered input-info w-full max-w-xs" />
+                            <input v-model="form.Thesis_No" placeholder="Thesis No"  
+                            class="input input-info w-full"
+                                :class="{ 'input-error': form.errors.Thesis_No }" />
                             <div v-if="form.errors.Thesis_No" class="text-error">
                                 {{ form.errors.Thesis_No }}
                             </div>
                         </div>
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">Thesis Group</label> -->
-                            <input type="text" placeholder="Thesis Group" 
-                            className="input input-bordered input-info w-full max-w-xs" />
+                            <input v-model="form.Thesis_Group" placeholder="Thesis Group"  
+                            class="input input-info w-full"
+                                :class="{ 'input-error': form.errors.Thesis_Group }" />
                             <div v-if="form.errors.Thesis_Group" class="text-error">
                                 {{ form.errors.Thesis_Group }}
                             </div>
@@ -107,8 +110,9 @@ const onSave = () => {
                         <div class="flex flex-col w-full">
                             <div class="mt-2">
                             <!-- <label class="label">Academic Year</label> -->
-                            <input type="text" placeholder="Academic Year" 
-                            className="input input-bordered input-info w-full max-w-xs" />
+                            <input v-model="form.Academic_Year" placeholder="Academic Year"  
+                            class="input input-info w-full"
+                                :class="{ 'input-error': form.errors.Academic_Year }" />
                             </div>
                             <div v-if="form.errors.Academic_Year" class="text-error">
                                 {{ form.errors.Academic_Year }}
@@ -120,8 +124,9 @@ const onSave = () => {
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">Department</label> -->
                             <div class="mt-2">
-                            <input type="text" placeholder="Department" 
-                            className="input input-bordered input-info w-full max-w-xs" />
+                                <input v-model="form.Department" placeholder="Department"  
+                                 class="input input-info w-full"
+                                :class="{ 'input-error': form.errors.Department}" />
                         </div>
                             <div v-if="form.errors.Department" class="text-error">
                                 {{ form.errors.Department }}
@@ -135,8 +140,9 @@ const onSave = () => {
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">Major</label> -->
                             <div class="mt-2">
-                            <input type="text" placeholder="Major" 
-                            className="input input-bordered input-info w-full max-w-xs" />
+                                <input v-model="form.Major" placeholder="Major"  
+                            class="input input-info w-full"
+                                :class="{ 'input-error': form.errors.Major }" />
                           </div>
                             <div v-if="form.errors.Major" class="text-error">
                                 {{ form.errors.Major }}
@@ -148,8 +154,9 @@ const onSave = () => {
                         <div class="flex flex-col w-full">
                             <div class="mt-2">
                             <!-- <label class="label">Year</label> -->
-                            <input type="text" placeholder="Year" 
-                            className="input input-bordered input-info w-full max-w-xs" />
+                            <input v-model="form.Year" placeholder="Year"  
+                            class="input input-info w-full"
+                                :class="{ 'input-error': form.errors.Year }" />
                             </div>
                             <div v-if="form.errors.Year" class="text-error">
                                 {{ form.errors.Year }}
@@ -160,8 +167,9 @@ const onSave = () => {
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">Batch</label> -->
                             <div class="mt-2">
-                            <input type="text" placeholder="Batch" 
-                            className="input input-bordered input-info w-full max-w-xs" />
+                                <input v-model="form.Batch" placeholder="Batch"  
+                            class="input input-info w-full"
+                                :class="{ 'input-error': form.errors.Batch }" />
                             </div>
                             <div v-if="form.errors.Batch" class="text-error">
                                 {{ form.errors.Batch }}
@@ -280,8 +288,9 @@ const onSave = () => {
                         <div class="flex flex-col w-full">
                             <div class="mt-2">
                             <!-- <label class="label">Teacher Name</label> -->
-                            <input type="text" placeholder="Teacher Name" 
-                            className="input input-bordered input-info w-full max-w-xs" />
+                            <input v-model="form.Teacher_id" placeholder="Teacher Name"  
+                            class="input input-info w-full"
+                                :class="{ 'input-error': form.errors.Teacher_id }" />
                             </div>
                             <div v-if="form.errors.Teacher_id" class="text-error">
                                 {{ form.errors.Teacher_id }}
@@ -291,8 +300,9 @@ const onSave = () => {
                         <div class="flex flex-col w-full">
                             <div class="mt-2">
                             <!-- <label class="label">Submit Date</label> -->
-                            <input type="text" placeholder="Submit Date" 
-                            className="input input-bordered input-info w-full max-w-xs" />
+                            <input v-model="form.Submit_Date" placeholder="Submit Date"  
+                            class="input input-info w-full"
+                                :class="{ 'input-error': form.errors.Submit_Date }" />
                             </div>
                             <div v-if="form.errors.Submit_Date" class="text-error">
                                 {{ form.errors.Submit_Date }}
@@ -302,8 +312,9 @@ const onSave = () => {
                         <div class="flex flex-col w-full">
                             <div class="mt-2">
                             <!-- <label class="label">Defend Date</label> -->
-                            <input type="text" placeholder="Defend Date" 
-                            className="input input-bordered input-info w-full max-w-xs" />
+                            <input v-model="form.Defend_Date" placeholder="Defend Date"  
+                            class="input input-info w-full"
+                                :class="{ 'input-error': form.errors.Defend_Date }" />
                             </div>
                             <div v-if="form.errors.Defend_Date" class="text-error">
                                 {{ form.errors.Defend_Date }}
@@ -313,8 +324,9 @@ const onSave = () => {
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">Defend time</label> -->
                             <div class="mt-2">
-                            <input type="text" placeholder="Defend time" 
-                            className="input input-bordered input-info w-full max-w-xs" />
+                                <input v-model="form.Defend_time" placeholder="Defend Time"  
+                            class="input input-info w-full"
+                                :class="{ 'input-error': form.errors.Defend_time }" />
                             </div>
                             <div v-if="form.errors.Defend_time" class="text-error">
                                 {{ form.errors.Defend_time }}
@@ -326,8 +338,9 @@ const onSave = () => {
                         <div class="flex flex-col w-full">
                             <div class="mt-2">
                             <!-- <label class="label">Book Score</label> -->
-                            <input type="text" placeholder="Book Score" 
-                            className="input input-bordered input-info w-full max-w-xs" />
+                            <input v-model="form.Book_Score" placeholder="Book Score"  
+                            class="input input-info w-full"
+                                :class="{ 'input-error': form.Book_Score }" />
                             </div>
                             <div v-if="form.errors.Book_Score" class="text-error">
                                 {{ form.errors.Book_Score }}
@@ -337,8 +350,9 @@ const onSave = () => {
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">Submit Book</label> -->
                             <div class="mt-2">
-                            <input type="text" placeholder="Submit Book" 
-                            className="input input-bordered input-info w-full max-w-xs" />
+                                <input v-model="form.Submit_book" placeholder="Submit Book"  
+                            class="input input-info w-full"
+                                :class="{ 'input-error': form.errors.Submit_book }" />
                             </div>
                             <div v-if="form.errors.Submit_book" class="text-error">
                                 {{ form.errors.Submit_book }}
@@ -347,8 +361,12 @@ const onSave = () => {
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">Building</label> -->
                             <div class="mt-2">
-                            <input type="text" placeholder="Building" 
-                            className="input input-bordered input-info w-full max-w-xs" />
+                                <select className="select select-info w-full max-w-xs">
+                                <option disabled selected>Select Building</option>
+                                <option>G</option>
+                                <option>H</option>
+                                <option>L</option>
+                                </select>
                             </div>
                             <div v-if="form.errors.Building" class="text-error">
                                 {{ form.errors.Building }}
@@ -357,8 +375,9 @@ const onSave = () => {
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">Room</label> -->
                             <div class="mt-2">
-                            <input type="text" placeholder="Room" 
-                            className="input input-bordered input-info w-full max-w-xs" />
+                                <input v-model="form.Room" placeholder="Room"  
+                            class="input input-info w-full"
+                                :class="{ 'input-error': form.errors.Room }" />
                             </div>
                             <div v-if="form.errors.Room" class="text-error">
                                 {{ form.errors.Room }}

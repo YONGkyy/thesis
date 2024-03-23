@@ -7,6 +7,13 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 // import Heading from './Components/Heading.vue';
 import { createPinia} from 'pinia';
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { library } from '@fortawesome/fontawesome-svg-core';
+library.add(fas, fab);
+
+
 const pinia = createPinia();
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -18,6 +25,7 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue)
             .use(pinia)
+            .component("font-awesome-icon", FontAwesomeIcon)
             // .component('Heading', Heading)
             .component('Link', Link)
             .mount(el);

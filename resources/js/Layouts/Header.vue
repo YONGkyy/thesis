@@ -68,7 +68,6 @@ onMounted(() => {
 const logout = () => {
     router.post(route("logout"));
 };5678
-
 </script>
 
 <template>

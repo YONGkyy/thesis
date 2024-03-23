@@ -105,41 +105,51 @@ const onDelete = async (Academic_year: string) => {
                 <form @submit.prevent="onSave">
                     <div class="flex flex-col gap-2 lg:flex-row">
                         <div class="flex flex-col w-full">
-                            <label class="label">Academic_year</label>
-                            <input v-model="form.Academic_year" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.Academic_year }" />
+                            <!-- <label class="label">Academic year</label> -->
+                            <input 
+                            type="text" 
+                            placeholder="Academic Year" 
+                            className="input input-bordered input-info w-full max-w-xs" />
                             <div v-if="form.errors.Academic_year" class="text-error">
                                 {{ form.errors.Academic_year }}
                             </div>
                         </div>
                         <div class="flex flex-col w-full">
-                            <label class="label">Department</label>
-                            <input v-model="form.Department" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.Department }" />
+                            <!-- <label class="label">Department</label> -->
+                            <input 
+                            type="text" 
+                            placeholder="Department" 
+                            className="input input-bordered input-info w-full max-w-xs" />
                             <div v-if="form.errors.Department" class="text-error">
                                 {{ form.errors.Department }}
                             </div>
                         </div>
                         <div class="flex flex-col w-full">
-                            <label class="label">Major</label>
-                            <input v-model="form.Major" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.Major }" />
+                            <!-- <label class="label">Major</label> -->
+                            <input 
+                            type="text" 
+                            placeholder="Major" 
+                            className="input input-bordered input-info w-full max-w-xs" />
                             <div v-if="form.errors.Major" class="text-error">
                                 {{ form.errors.Major }}
                             </div>
                         </div>
                         <div class="flex flex-col w-full">
-                            <label class="label">Committee</label>
-                            <input v-model="form.Committee" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.Committee }" />
+                            <!-- <label class="label">Committee</label> -->
+                            <input 
+                            type="text" 
+                            placeholder="Committee" 
+                            className="input input-bordered input-info w-full max-w-xs" />
                             <div v-if="form.errors.Committee" class="text-error">
                                 {{ form.errors.Committee }}
                             </div>
                         </div>
                         <div class="flex flex-col w-full">
-                            <label class="label">Subject</label>
-                            <input v-model="form.Subject" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.Subject }" />
+                            <!-- <label class="label">Subject</label> -->
+                            <input 
+                            type="text" 
+                            placeholder="Subject" 
+                            className="input input-bordered input-info w-full max-w-xs" />
                             <div v-if="form.errors.Subject" class="text-error">
                                 {{ form.errors.Subject }}
                             </div>
@@ -158,12 +168,12 @@ const onDelete = async (Academic_year: string) => {
                 <h2 class="text-2xl font-bold">ThesisCommittee Management</h2>
                 <div class="mt-4">
                     <div class="bg-base-100 p-2 rounded-xl flex gap-2 items-center">
-                        <Link :href="route('thesisCommittee.create')" class="btn btn-primary">New</Link>
+                        <!-- <Link :href="route('thesisCommittee.create')" class="btn btn-primary">New</Link> -->
                         <input 
                             v-model="filterForm.keyword"
                             type="text" 
                             placeholder="Search..." 
-                            class="input input-primary w-full"/>
+                            class="input input-info w-full"/>
 
                         <button class="btn btn-warning" type="button" @click="onClearFilter">Clear</button>
                     </div>
@@ -173,7 +183,7 @@ const onDelete = async (Academic_year: string) => {
                 <table class="table table-lg">
                     <thead>
                         <tr>
-                            <th>Academic_Year</th>
+                            <th>Academic Year</th>
                             <th>Department</th>
                             <th>Major</th>
                             <th>Committee</th>
@@ -214,7 +224,7 @@ const onDelete = async (Academic_year: string) => {
                         v-for="link in thesisCommittees.links" 
                         :href="link.url ?? '#'"
                         class="join-item btn"
-                        :class="{ 'btn-primary': link.active }">
+                        :class="{ 'btn-info': link.active }">
                         <span v-html="link.label"></span>
                     </Link>
                 </div>
