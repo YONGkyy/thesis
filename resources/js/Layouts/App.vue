@@ -8,7 +8,7 @@ import { Head } from "@inertiajs/vue3";
         <title>Dasboard</title>
     </Head>
 
-    <div class="flex h-screen p-3 bg-blue-700 dark:bg-blue-900">
+    <div class="flex h-screen p-3 bg-blue-50 dark:bg-blue-500">
         <Sidebar />
         <div class="flex flex-col flex-1 overflow-hidden">
             <Header />

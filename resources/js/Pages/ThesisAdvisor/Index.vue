@@ -8,11 +8,34 @@ import { throttle, pickBy } from "lodash";
 import Swal from "sweetalert2";
 
 const props = defineProps<{
+    thesisAdvisor?: ThesisAdvisorType
     thesisAdvisors: PaginateType<ThesisAdvisorType>
     filters?: {
         keyword: string;
     };
 }>();
+
+const form = useForm({
+    Academic_year: props.thesisAdvisor?.Academic_year ?? "",
+    n: props.thesisAdvisor?.n ?? "",
+    College: props.thesisAdvisor?.College ?? "",
+    Department: props.thesisAdvisor?.Department ?? "",
+    Advisor: props.thesisAdvisor?.Advisor ?? "",
+});
+const onSave = () => {
+    form.post(route("thesisAdvisor.store"), {
+        onSuccess: () => {
+            Swal.fire({
+                icon: "success",
+                title: "ThesisAdvisor has been saved.",
+                timer: 3000,
+                position: "top-end",
+                toast: true,
+            });
+        },
+    });
+};
+
 
 const filterForm = useForm({
     keyword: props.filters?.keyword ?? "",
@@ -61,29 +84,108 @@ const onDelete = async (Academic_year: string) => {
 };
 </script>
 <template>
-    <App>
+     <App>
+        <div class="p-3">
+            <h2 class="text-2xl font-bold">Create a ThesisAdvisor</h2>
+            <div class="mt-4">
+               
+            </div>
+            <div class='mt-4 p-4 bg-base-100 rounded-xl'>
+                <form @submit.prevent="onSave">
+                    <div class="flex flex-col gap-2 lg:flex-row">
+
+                        <div class="flex flex-col w-full">
+                            <!-- <label class="label">Academic year</label> -->
+                            <input 
+                            type="text" 
+                            placeholder="Academic Year" 
+                            className="input input-bordered input-info w-full max-w-xs" />
+                            <!-- <input v-model="form.Academic_year" class="input input-primary w-full"
+                                :class="{ 'input-error': form.errors.Academic_year }" /> -->
+                            <div v-if="form.errors.Academic_year" class="text-error">
+                                {{ form.errors.Academic_year }}
+                            </div>
+                        </div>
+                        <div class="flex flex-col w-full">
+                            <!-- <label class="label">ID</label> -->
+                            <input 
+                            type="text" 
+                            placeholder="ID" 
+                            className="input input-bordered input-info w-full max-w-xs" />
+                            <!-- <input v-model="form.n" class="input input-primary w-full"
+                                :class="{ 'input-error': form.errors.n }" /> -->
+                            <div v-if="form.errors.n" class="text-error">
+                                {{ form.errors.n }}
+                            </div>
+                        </div>
+                        <div class="flex flex-col w-full">
+                            <!-- <label class="label">College</label> -->
+                            <input 
+                            type="text" 
+                            placeholder="College" 
+                            className="input input-bordered input-info w-full max-w-xs" />
+                            <!-- <input v-model="form.College" class="input input-primary w-full"
+                                :class="{ 'input-error': form.errors.College }" /> -->
+                            <div v-if="form.errors.College" class="text-error">
+                                {{ form.errors.College }}
+                            </div>
+                        </div>
+                        <div class="flex flex-col w-full">
+                            <!-- <label class="label">Department</label> -->
+                            <input 
+                            type="text" 
+                            placeholder="Department" 
+                            className="input input-bordered input-info w-full max-w-xs" />
+                            <!-- <input v-model="form.Department" class="input input-primary w-full"
+                                :class="{ 'input-error': form.errors.Department }" /> -->
+                            <div v-if="form.errors.Department" class="text-error">
+                                {{ form.errors.Department }}
+                            </div>
+                        </div>
+                        <div class="flex flex-col w-full">
+                            <!-- <label class="label">Advisor</label> -->
+                            <input 
+                            type="text" 
+                            placeholder="Advisor" 
+                            className="input input-bordered input-info w-full max-w-xs" />
+                            <!-- <input v-model="form.Advisor" class="input input-primary w-full"
+                                :class="{ 'input-error': form.errors.Advisor }" /> -->
+                            <div v-if="form.errors.Advisor" class="text-error">
+                                {{ form.errors.Advisor }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-2 flex justify-end">
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    
+    
         <div class="p-3">
             <div class="mb-2">
                 <h2 class="text-2xl font-bold">ThesisAdvisor Management</h2>
                 <div class="mt-4">
                     <div class="bg-base-100 p-2 rounded-xl flex gap-2 items-center">
-                        <Link :href="route('thesisAdvisor.create')" class="btn btn-primary">New</Link>
+                        <!-- <Link :href="route('thesisAdvisor.create')" class="btn btn-info">New</Link> -->
                         <input 
                             v-model="filterForm.keyword"
                             type="text" 
                             placeholder="Search..." 
-                            class="input input-primary w-full"/>
+                            class="input input-info w-full"/>
 
                         <button class="btn btn-warning" type="button" @click="onClearFilter">Clear</button>
                     </div>
                 </div>
             </div>
             <div class="bg-base-100 rounded-xl overflow-x-auto">
-                <table class="table table-lg">
+                <table class="table table-2xl">
                     <thead>
                         <tr>
-                            <th>Academic_year</th>
-                            <th>N</th>
+                            <th>Academic Year</th>
+                            <th>ID</th>
                             <th>College</th>
                             <th>Department</th>
                             <th>Advisor</th>
@@ -123,7 +225,7 @@ const onDelete = async (Academic_year: string) => {
                         v-for="link in thesisAdvisors.links" 
                         :href="link.url ?? '#'"
                         class="join-item btn"
-                        :class="{ 'btn-primary': link.active }">
+                        :class="{ 'btn-info': link.active }">
                         <span v-html="link.label"></span>
                     </Link>
                 </div>

@@ -8,16 +8,34 @@ import { throttle, pickBy } from "lodash";
 import Swal from "sweetalert2";
 
 const props = defineProps<{
+    thesisCommittee?: ThesisCommitteeType
     thesisCommittees: PaginateType<ThesisCommitteeType>
     filters?: {
         keyword: string;
-        // Academic_Year: string;
-        // Department: string;
-        // Major: string;      
-        // Committee: string;
-        // Subject: string;         
-    };
-}>();
+    }
+}>();   
+
+const form = useForm({
+    Academic_year: props.thesisCommittee?.Academic_Year ?? "",
+    Department: props.thesisCommittee?.Department ?? "",
+    Major: props.thesisCommittee?.Major ?? "",
+    Committee: props.thesisCommittee?.Committee ?? "",
+    Subject: props.thesisCommittee?.Subject ?? "",
+});
+
+const onSave = () => {
+    form.post(route("thesisCommittee.store"), {
+        onSuccess: () => {
+            Swal.fire({
+                icon: "success",
+                title: "ThesisCommittee has been saved.",
+                timer: 3000,
+                position: "top-end",
+                toast: true,
+            });
+        },
+    });
+};
 
 const filterForm = useForm({
     keyword: props.filters?.keyword ?? "",
@@ -79,16 +97,83 @@ const onDelete = async (Academic_year: string) => {
 <template>
     <App>
         <div class="p-3">
+            <h2 class="text-2xl font-bold">Create a ThesisCommittee</h2>
+            <div class="mt-4">
+                
+            </div>
+            <div class='mt-4 p-4 bg-base-100 rounded-xl'>
+                <form @submit.prevent="onSave">
+                    <div class="flex flex-col gap-2 lg:flex-row">
+                        <div class="flex flex-col w-full">
+                            <!-- <label class="label">Academic year</label> -->
+                            <input 
+                            type="text" 
+                            placeholder="Academic Year" 
+                            className="input input-bordered input-info w-full max-w-xs" />
+                            <div v-if="form.errors.Academic_year" class="text-error">
+                                {{ form.errors.Academic_year }}
+                            </div>
+                        </div>
+                        <div class="flex flex-col w-full">
+                            <!-- <label class="label">Department</label> -->
+                            <input 
+                            type="text" 
+                            placeholder="Department" 
+                            className="input input-bordered input-info w-full max-w-xs" />
+                            <div v-if="form.errors.Department" class="text-error">
+                                {{ form.errors.Department }}
+                            </div>
+                        </div>
+                        <div class="flex flex-col w-full">
+                            <!-- <label class="label">Major</label> -->
+                            <input 
+                            type="text" 
+                            placeholder="Major" 
+                            className="input input-bordered input-info w-full max-w-xs" />
+                            <div v-if="form.errors.Major" class="text-error">
+                                {{ form.errors.Major }}
+                            </div>
+                        </div>
+                        <div class="flex flex-col w-full">
+                            <!-- <label class="label">Committee</label> -->
+                            <input 
+                            type="text" 
+                            placeholder="Committee" 
+                            className="input input-bordered input-info w-full max-w-xs" />
+                            <div v-if="form.errors.Committee" class="text-error">
+                                {{ form.errors.Committee }}
+                            </div>
+                        </div>
+                        <div class="flex flex-col w-full">
+                            <!-- <label class="label">Subject</label> -->
+                            <input 
+                            type="text" 
+                            placeholder="Subject" 
+                            className="input input-bordered input-info w-full max-w-xs" />
+                            <div v-if="form.errors.Subject" class="text-error">
+                                {{ form.errors.Subject }}
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="mt-2 flex justify-end">
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="p-3">
             <div class="mb-2">
                 <h2 class="text-2xl font-bold">ThesisCommittee Management</h2>
                 <div class="mt-4">
                     <div class="bg-base-100 p-2 rounded-xl flex gap-2 items-center">
-                        <Link :href="route('thesisCommittee.create')" class="btn btn-primary">New</Link>
+                        <!-- <Link :href="route('thesisCommittee.create')" class="btn btn-primary">New</Link> -->
                         <input 
                             v-model="filterForm.keyword"
                             type="text" 
                             placeholder="Search..." 
-                            class="input input-primary w-full"/>
+                            class="input input-info w-full"/>
 
                         <button class="btn btn-warning" type="button" @click="onClearFilter">Clear</button>
                     </div>
@@ -98,7 +183,7 @@ const onDelete = async (Academic_year: string) => {
                 <table class="table table-lg">
                     <thead>
                         <tr>
-                            <th>Academic_Year</th>
+                            <th>Academic Year</th>
                             <th>Department</th>
                             <th>Major</th>
                             <th>Committee</th>
@@ -139,7 +224,7 @@ const onDelete = async (Academic_year: string) => {
                         v-for="link in thesisCommittees.links" 
                         :href="link.url ?? '#'"
                         class="join-item btn"
-                        :class="{ 'btn-primary': link.active }">
+                        :class="{ 'btn-info': link.active }">
                         <span v-html="link.label"></span>
                     </Link>
                 </div>

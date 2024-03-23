@@ -30,7 +30,7 @@ class ThesisAdvisorController extends Controller
      */
     public function create()
     { 
-        return Inertia::render('ThesisAdvisor/Create');
+        return Inertia::render('ThesisAdvisor/Index');
     }
 
     /**
@@ -86,7 +86,7 @@ class ThesisAdvisorController extends Controller
      */
     public function edit(ThesisAdvisor $thesisAdvisor)
     {
-        return Inertia::render('ThesisAdvisor/Create', [
+        return Inertia::render('ThesisAdvisor/Index', [
             'thesisAdvisor' =>$thesisAdvisor
         ]);
     }
