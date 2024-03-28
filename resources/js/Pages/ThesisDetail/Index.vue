@@ -68,7 +68,7 @@ const onClearFilter = () => {
     filterForm.keyword = "";
 };
 
-const onDelete = async (Thesis_No: number) => {
+const onDelete = async (id: number) => {
     await Swal.fire({
         title: "Do you want to delete?",
         showDenyButton: false,
@@ -79,7 +79,7 @@ const onDelete = async (Thesis_No: number) => {
         denyButtonText: "Cancel",
     }).then((result) => {
         if (result.isConfirmed) {
-            router.delete(route("thesisDetail.destroy", Thesis_No), {
+            router.delete(route("thesisDetail.destroy", id), {
                 onSuccess: () => {
                     Swal.fire({
                         icon: "success",
@@ -238,12 +238,22 @@ const onDelete = async (Thesis_No: number) => {
                 <table class="table table-lg">
                     <thead>
                         <tr>
+<<<<<<< HEAD
                             <th>Thesis No</th>
                             <th>Student ID</th>
                             <th>Phone</th>
                             <th>Defend</th>
                             <th>Pass State</th>
                             <th>Issue Tem Certificate</th>
+=======
+                            <th>ID</th>
+                            <th>Thesis_No</th>
+                            <th>Student_ID</th>
+                            <th>Phone</th>
+                            <th>Defend</th>
+                            <th>Pass_State</th>
+                            <th>Issue_Tem_Certificate</th>
+>>>>>>> yong
                             <th>Other</th>
                             <th>Hardwork</th>
                             <th>Charateristic</th>
@@ -256,25 +266,26 @@ const onDelete = async (Thesis_No: number) => {
                         <tr
                             v-for="(item, index) in thesisDetails.data" 
                             :key="index">
+                            <td>{{ item.id }}</td>
                             <td>{{ item.Thesis_No }}</td>
                             <td>{{ item.Student_ID }}</td>
                             <td>{{ item.Phone }}</td>
                             <td>{{ item.Defend }}</td>
                             <td>{{ item.Pass_State }}</td> 
                             <td>{{ item.Issue_Tem_Certificate}}</td>
-                            <td>{{ item.other}}</td>
-                            <td>{{ item.hardwork}}</td>
-                            <td>{{ item.charateristic}}</td>
-                            <td>{{ item.remark}}</td>
-                            <td>{{ item.result}}</td>
+                            <td>{{ item.Other}}</td>
+                            <td>{{ item.Hardwork}}</td>
+                            <td>{{ item.Charateristic}}</td>
+                            <td>{{ item.Remark}}</td>
+                            <td>{{ item.Result}}</td>
                             <td>
                                 <Link 
-                                    :href="route('thesisDetail.edit', item.Thesis_No)"
+                                    :href="route('thesisDetail.edit', item.id)"
                                     class="btn btn-warning mr-2">Edit
                                 </Link>
                                 <button 
                                     type="button"
-                                    @click="onDelete(item.Thesis_No)"
+                                    @click="onDelete(item.id)"
                                     class="btn btn-error">
                                     Delete
                                 </button>

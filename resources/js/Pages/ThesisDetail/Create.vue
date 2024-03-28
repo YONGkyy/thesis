@@ -9,17 +9,18 @@ const props = defineProps<{
     thesisDetail?: ThesisDetailType;
 }>();
 const form = useForm({
+    id: props.thesisDetail?.id ?? "",
     Thesis_No: props.thesisDetail?.Thesis_No ?? "",
     Student_ID: props.thesisDetail?.Student_ID ?? "",
     Phone: props.thesisDetail?.Phone ?? "",
     Defend: props.thesisDetail?.Defend ?? "",
     Pass_State: props.thesisDetail?.Pass_State ?? "",
     Issue_Tem_Certificate: props.thesisDetail?.Issue_Tem_Certificate ?? "",
-    other: props.thesisDetail?.other ?? "",
-    hardwork: props.thesisDetail?.hardwork ?? "",
-    charateristic: props.thesisDetail?.charateristic ?? "",
-    remark: props.thesisDetail?.remark ?? "",
-    result: props.thesisDetail?.result ?? "",
+    Other: props.thesisDetail?.Other ?? "",
+    Hardwork: props.thesisDetail?.Hardwork ?? "",
+    Charateristic: props.thesisDetail?.Charateristic ?? "",
+    Remark: props.thesisDetail?.Remark ?? "",
+    Result: props.thesisDetail?.Result ?? "",
 
 });
 const onSave = () => {
@@ -100,45 +101,45 @@ const onSave = () => {
                             </div>
                         </div>
                         <div class="flex flex-col w-full">
-                            <label class="label">other</label>
-                            <input v-model="form.other" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.other }" />
-                            <div v-if="form.errors.other" class="text-error">
-                                {{ form.errors.other }}
+                            <label class="label">Other</label>
+                            <input v-model="form.Other" class="input input-primary w-full"
+                                :class="{ 'input-error': form.errors.Other }" />
+                            <div v-if="form.errors.Other" class="text-error">
+                                {{ form.errors.Other }}
                             </div>
                         </div>
                         <div class="flex flex-col w-full">
-                            <label class="label">hardwork</label>
-                            <input v-model="form.hardwork" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.hardwork }" />
-                            <div v-if="form.errors.hardwork" class="text-error">
-                                {{ form.errors.hardwork }}
+                            <label class="label">Hardwork</label>
+                            <input v-model="form.Hardwork" class="input input-primary w-full"
+                                :class="{ 'input-error': form.errors.Hardwork }" />
+                            <div v-if="form.errors.Hardwork" class="text-error">
+                                {{ form.errors.Hardwork }}
                             </div>
                         </div>
                     </div>
                     <div class="flex flex-col gap-2 lg:flex-row">                    
                         <div class="flex flex-col w-full">
-                            <label class="label">charateristic</label>
-                            <input v-model="form.charateristic" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.charateristic }" />
-                            <div v-if="form.errors.charateristic" class="text-error">
-                                {{ form.errors.charateristic }}
+                            <label class="label">Charateristic</label>
+                            <input v-model="form.Charateristic" class="input input-primary w-full"
+                                :class="{ 'input-error': form.errors.Charateristic }" />
+                            <div v-if="form.errors.Charateristic" class="text-error">
+                                {{ form.errors.Charateristic }}
                             </div>
                         </div>
                         <div class="flex flex-col w-full">
-                            <label class="label">remark</label>
-                            <input v-model="form.remark" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.remark }" />
-                            <div v-if="form.errors.remark" class="text-error">
-                                {{ form.errors.remark }}
+                            <label class="label">Remark</label>
+                            <input v-model="form.Remark" class="input input-primary w-full"
+                                :class="{ 'input-error': form.errors.Remark }" />
+                            <div v-if="form.errors.Remark" class="text-error">
+                                {{ form.errors.Remark }}
                             </div>
                         </div>
                         <div class="flex flex-col w-full">
-                            <label class="label">result</label>
-                            <input v-model="form.result" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.result }" />
-                            <div v-if="form.errors.result" class="text-error">
-                                {{ form.errors.result }}
+                            <label class="label">Result</label>
+                            <input v-model="form.Result" class="input input-primary w-full"
+                                :class="{ 'input-error': form.errors.Result }" />
+                            <div v-if="form.errors.Result" class="text-error">
+                                {{ form.errors.Result }}
                             </div>
                         </div>
                     </div>

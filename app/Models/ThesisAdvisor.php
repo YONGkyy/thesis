@@ -9,11 +9,11 @@ class ThesisAdvisor extends Model
 {
     use HasFactory;
     protected $table = 'thesis_advisor';
-    protected $primaryKey = 'Academic_year';
     protected $fillable = [
-        'n',
+        'Academic_Year',
+        'Advisor',
         'College',
         'Department',
-        'Advisor',
     ];
+    
 }

@@ -1,8 +1,9 @@
 export interface ThesisCommitteeType {
+    id: number;
     Academic_Year: string;
-    Department: string;
     Major: string;      
     Committee: string;
+    Department: string;
     Subject: string; 
        
     created_at: string;

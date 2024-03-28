@@ -1,17 +1,15 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ThesisAdvisorController;
 use App\Http\Controllers\ThesisCommitteeController;
 use App\Http\Controllers\ThesisController;
 use App\Http\Controllers\ThesisDetailController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\RedirectToDashbordIfLoggedIn;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
+<<<<<<< HEAD
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,56 +43,13 @@ Route::middleware('auth')->group(function () {
 // Route::get('/count', function(){
 //     return inertia('Count');
 // });
+=======
+>>>>>>> yong
 Route::get('/', function(){
     return redirect()->route('dashboard');
 });
 
 Route::middleware('checkAuth')->group(function () {
-
-    // thesis
-    // Route::prefix('/thesis')
-    // ->controller(ThesisController::class)
-    // ->name('thesis.')->group(function () {
-    //     // thesis
-    //     // 1. List all rooms
-    //     Route::get('/',  'index')->name('index');
-    //     // 2. Create a thesis
-    //     Route::get('/create',  'create')->name('create');
-    //     // 3. show edit form
-
-    //     Route::get('/edit/{id}',  'edit')->name('edit');
-
-    //     // 4. Store or Update a thesis
-    //     Route::post('/store/{id?}',  'store')->name('store');
-    //     // 5. Delete a thesis
-
-    //     Route::delete('/delete/{id}', 'destroy')->name('destroy');
-
-
-    //     Route::post('/update/{id}', 'update')->name('update');
-    // });
-        // thesisCommittee
-    // Route::prefix('/thesisCommittee')
-    // ->controller(ThesisCommitteeController::class)
-    // ->name('thesisCommittee.')->group(function () {
-    //     // thesisCommittee
-    //     // 1. List all thesisCommittees
-    //     Route::get('/',  'index')->name('index');
-    //     // 2. Create a thesisCommittee
-    //     Route::get('/create',  'create')->name('create');
-    //     // 3. show edit form
-
-    //     Route::get('/edit/{Academic_Year}',  'edit')->name('edit');
-
-    //     // 4. Store or Update a thesisCommittee
-    //     Route::post('/store/{Academic_Year?}',  'store')->name('store');
-
-    //     // 5. Delete a thesisCommittee
-
-    //     Route::delete('/delete/{Academic_Year}', 'destroy')->name('destroy');
-
-    //     Route::post('/update/{Academic_Year}', 'update')->name('update');
-    // });
 
     // // thesis
     Route::resource('/thesis', ThesisController::class);
@@ -123,5 +78,8 @@ Route::get('/login', [UserController::class, 'login'])
 
 // get login data from user input
 Route::post('/login', [UserController::class, 'verifyLogin'])->name('login.verify');
+<<<<<<< HEAD
 
 require __DIR__.'/auth.php';
+=======
+>>>>>>> yong

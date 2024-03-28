@@ -6,14 +6,10 @@ import { MoveLeft } from 'lucide-vue-next';
 import Swal from 'sweetalert2'
 
 const props = defineProps<{
-    // thesisAdvisors: {
-    //     n: number;
-    //     Advisor: string;
-    // }[];
     thesis?: ThesisType;
 }>();
 const form = useForm({
-    N: props.thesis?.N ?? "",
+    id: props.thesis?.id ?? "",
     Thesis_No: props.thesis?.Thesis_No ?? "",
     Thesis_Group: props.thesis?.Thesis_Group ?? "",
     Academic_Year: props.thesis?.Academic_Year ?? "",
@@ -72,6 +68,7 @@ const onSave = () => {
 
 
                         <div class="flex flex-col w-full">
+<<<<<<< HEAD
                             <!-- <label class="label">ID</label> -->
                             <input v-model="form.N" placeholder="ID"  
                             class="input input-info w-full"
@@ -84,6 +81,10 @@ const onSave = () => {
                             <!-- <label class="label">Thesis No</label> -->
                             <input v-model="form.Thesis_No" placeholder="Thesis No"  
                             class="input input-info w-full"
+=======
+                            <label class="label">Thesis_No</label>
+                            <input v-model="form.Thesis_No" class="input input-primary w-full"
+>>>>>>> yong
                                 :class="{ 'input-error': form.errors.Thesis_No }" />
                             <div v-if="form.errors.Thesis_No" class="text-error">
                                 {{ form.errors.Thesis_No }}

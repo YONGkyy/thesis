@@ -1,5 +1,5 @@
 export interface ThesisType {
-    N: number;
+    id: number;
     Thesis_No: number;
     Thesis_Group: number;
     Academic_Year: string;
@@ -20,7 +20,7 @@ export interface ThesisType {
     Submit_Date: string;
     Teacher_id: string;
     Defend_Date: string;
-    Book_Score: string;
+    Book_Score: number;
     Defend_time: string;
     Submit_book: string;
     Building: string;
@@ -29,4 +29,3 @@ export interface ThesisType {
     created_at: string;
     updated_at: string;
 }
-
