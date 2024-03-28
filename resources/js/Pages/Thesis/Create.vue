@@ -6,14 +6,10 @@ import { MoveLeft } from 'lucide-vue-next';
 import Swal from 'sweetalert2'
 
 const props = defineProps<{
-    // thesisAdvisors: {
-    //     n: number;
-    //     Advisor: string;
-    // }[];
     thesis?: ThesisType;
 }>();
 const form = useForm({
-    N: props.thesis?.N ?? "",
+    id: props.thesis?.id ?? "",
     Thesis_No: props.thesis?.Thesis_No ?? "",
     Thesis_Group: props.thesis?.Thesis_Group ?? "",
     Academic_Year: props.thesis?.Academic_Year ?? "",
@@ -67,14 +63,6 @@ const onSave = () => {
             <div class='mt-4 p-4 bg-base-100 rounded-xl'>
                 <form @submit.prevent="onSave">
                     <div class="flex flex-col gap-2 lg:flex-row">
-                        <div class="flex flex-col w-full">
-                            <label class="label">N</label>
-                            <input v-model="form.N" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.N }" />
-                            <div v-if="form.errors.N" class="text-error">
-                                {{ form.errors.N }}
-                            </div>
-                        </div>
                         <div class="flex flex-col w-full">
                             <label class="label">Thesis_No</label>
                             <input v-model="form.Thesis_No" class="input input-primary w-full"

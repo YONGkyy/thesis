@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import App from "@/Layouts/App.vue";
+import { PaginateType } from "@/types/paginateType";
 import { ThesisAdvisorType } from "@/types/thesisAdvisor";
-import {PaginateType} from "@/types/paginateType";
-import { useForm, router } from "@inertiajs/vue3";
-import { watch } from "vue";
-import { throttle, pickBy } from "lodash";
+import { router, useForm } from "@inertiajs/vue3";
+import { pickBy, throttle } from "lodash";
 import Swal from "sweetalert2";
+import { watch } from "vue";
 
 const props = defineProps<{
     thesisAdvisors: PaginateType<ThesisAdvisorType>
@@ -34,7 +34,7 @@ const onClearFilter = () => {
     filterForm.keyword = "";
 };
 
-const onDelete = async (Academic_year: string) => {
+const onDelete = async (id: number) => {
     await Swal.fire({
         title: "Do you want to delete?",
         showDenyButton: false,
@@ -45,7 +45,7 @@ const onDelete = async (Academic_year: string) => {
         denyButtonText: "Cancel",
     }).then((result) => {
         if (result.isConfirmed) {
-            router.delete(route("thesisAdvisor.destroy", Academic_year), {
+            router.delete(route("thesisAdvisor.destroy", id), {
                 onSuccess: () => {
                     Swal.fire({
                         icon: "success",
@@ -82,11 +82,11 @@ const onDelete = async (Academic_year: string) => {
                 <table class="table table-lg">
                     <thead>
                         <tr>
-                            <th>Academic_year</th>
-                            <th>N</th>
+                            <th>Id</th>
+                            <th>Academic_Year</th>
+                            <th>Advisor</th>
                             <th>College</th>
                             <th>Department</th>
-                            <th>Advisor</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -94,19 +94,19 @@ const onDelete = async (Academic_year: string) => {
                         <tr
                             v-for="(item, index) in thesisAdvisors.data" 
                             :key="index">
-                            <td>{{ item.Academic_year }}</td>
-                            <td>{{ item.n }}</td>
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.Academic_Year }}</td>
+                            <td>{{ item.Advisor }}</td>                          
                             <td>{{ item.College }}</td>
                             <td>{{ item.Department }}</td>
-                            <td>{{ item.Advisor }}</td>                          
                             <td>
                                 <Link 
-                                    :href="route('thesisAdvisor.edit', item.Academic_year)"
+                                    :href="route('thesisAdvisor.edit', item.id)"
                                     class="btn btn-warning mr-2">Edit
                                 </Link>
                                 <button 
                                     type="button"
-                                    @click="onDelete(item.Academic_year)"
+                                    @click="onDelete(item.id)"
                                     class="btn btn-error">
                                     Delete
                                 </button>
@@ -115,7 +115,7 @@ const onDelete = async (Academic_year: string) => {
                     </tbody>
                 </table>
             </div>
-
+            
             <!-- Pagination -->
             <div class="bg-base-100 rounded-xl mt-2 flex justify-center p-2">
                 <div class="join">

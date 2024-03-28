@@ -9,17 +9,17 @@ class ThesisDetail extends Model
 {
     use HasFactory;
     protected $table  = 'thesis_detail';
-    protected $primaryKey = 'Thesis_No';
     protected  $fillable= [
+        'Thesis_No',
         'Student_ID',
         'Phone',
         'Defend',
         'Pass_State',
         'Issue_Tem_Certificate',
-        'other',
-        'hardwork',
-        'charateristic',
-        'remark',
-        'result',
+        'Other',
+        'Hardwork',
+        'Charateristic',
+        'Remark',
+        'Result',
     ];
 }

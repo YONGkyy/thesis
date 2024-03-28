@@ -1,32 +1,21 @@
 <script setup lang="ts">
 import App from "@/Layouts/App.vue";
+import { PaginateType } from "@/types/paginateType";
 import { ThesisCommitteeType } from "@/types/thesisCommittee";
-import {PaginateType} from "@/types/paginateType";
-import { useForm, router } from "@inertiajs/vue3";
-import { watch } from "vue";
-import { throttle, pickBy } from "lodash";
+import { router, useForm } from "@inertiajs/vue3";
+import { pickBy, throttle } from "lodash";
 import Swal from "sweetalert2";
+import { watch } from "vue";
 
 const props = defineProps<{
     thesisCommittees: PaginateType<ThesisCommitteeType>
     filters?: {
-        keyword: string;
-        // Academic_Year: string;
-        // Department: string;
-        // Major: string;      
-        // Committee: string;
-        // Subject: string;         
+        keyword: string;      
     };
 }>();
 
 const filterForm = useForm({
     keyword: props.filters?.keyword ?? "",
-    // Department: props.filters?.Department ?? "",
-    // Academic_Year: props.filters?.Academic_Year ?? "",
-    // Major: props.filters?.Major ?? "",
-    // Committee: props.filters?.Committee ?? "",
-    // Subject: props.filters?.Subject ?? "",
-
 });
 
 watch(
@@ -43,14 +32,9 @@ watch(
 
 const onClearFilter = () => {
     filterForm.keyword = "";
-    // filterForm.Department = "";
-    // filterForm.Academic_Year = "";
-    // filterForm.Major = "";
-    // filterForm.Committee = "";
-    // filterForm.Subject = "";
 };
 
-const onDelete = async (Academic_year: string) => {
+const onDelete = async (id: number) => {
     await Swal.fire({
         title: "Do you want to delete?",
         showDenyButton: false,
@@ -61,7 +45,7 @@ const onDelete = async (Academic_year: string) => {
         denyButtonText: "Cancel",
     }).then((result) => {
         if (result.isConfirmed) {
-            router.delete(route("thesisCommittee.destroy", Academic_year), {
+            router.delete(route("thesisCommittee.destroy", id), {
                 onSuccess: () => {
                     Swal.fire({
                         icon: "success",
@@ -98,10 +82,11 @@ const onDelete = async (Academic_year: string) => {
                 <table class="table table-lg">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Academic_Year</th>
-                            <th>Department</th>
                             <th>Major</th>
                             <th>Committee</th>
+                            <th>Department</th>
                             <th>Subject</th>
                             <th>Actions</th>
                         </tr>
@@ -110,19 +95,20 @@ const onDelete = async (Academic_year: string) => {
                         <tr
                             v-for="(item, index) in thesisCommittees.data"
                             :key="index">
+                            <td>{{ item.id }}</td>
                             <td>{{ item.Academic_Year }}</td>
-                            <td>{{ item.Department }}</td>
                             <td>{{ item.Major }}</td>
                             <td>{{ item.Committee }}</td>
+                            <td>{{ item.Department }}</td>
                             <td>{{ item.Subject }}</td>
                             <td>
                                 <Link 
-                                    :href="route('thesisCommittee.edit', item.Academic_Year)"
+                                    :href="route('thesisCommittee.edit', item.id)"
                                     class="btn btn-warning mr-2">Edit
                                 </Link>
                                 <button 
                                     type="button"
-                                    @click="onDelete(item.Academic_Year)"
+                                    @click="onDelete(item.id)"
                                     class="btn btn-error">
                                     Delete
                                 </button>

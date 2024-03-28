@@ -34,7 +34,7 @@ const onClearFilter = () => {
     filterForm.keyword = "";
 };
 
-const onDelete = async (N: number) => {
+const onDelete = async (id: number) => {
     await Swal.fire({
         title: "Do you want to delete?",
         showDenyButton: false,
@@ -45,7 +45,7 @@ const onDelete = async (N: number) => {
         denyButtonText: "Cancel",
     }).then((result) => {
         if (result.isConfirmed) {
-            router.delete(route("thesis.destroy", N), {
+            router.delete(route("thesis.destroy", id), {
                 onSuccess: () => {
                     Swal.fire({
                         icon: "success",
@@ -82,7 +82,7 @@ const onDelete = async (N: number) => {
                 <table class="table table-lg">
                     <thead>
                         <tr>
-                            <th>N</th>
+                            <th>ID</th>
                             <th>Thesis_No</th>
                             <th>Thesis_Group</th>
                             <th>Academic_Year</th>
@@ -91,7 +91,7 @@ const onDelete = async (N: number) => {
                             <th>Year</th>
                             <th>Batch</th>
                             <th>Session</th>
-                            <th>Organizaition</th>
+                            <!-- <th>Organizaition</th>
                             <th>Organization_Type</th>
                             <th>Location</th>
                             <th>Organization_Phone</th>
@@ -100,22 +100,22 @@ const onDelete = async (N: number) => {
                             <th>Objective</th>
                             <th>Objective_Khmer</th>
                             <th>Summary</th>
-                            <th>Submit_Date</th>
+                            <th>Submit_Date</th> -->
                             <th>Teacher_id</th>
-                            <th>Defend_Date</th>
+                            <!-- <th>Defend_Date</th> -->
                             <th>Book_Score</th>
-                            <th>Defend_time</th>
+                            <!-- <th>Defend_time</th>
                             <th>Submit_book</th>
                             <th>Building</th>
-                            <th>Room</th>
+                            <th>Room</th> -->
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr
                             v-for="(item, index) in thesises.data" 
-                            :key="index">
-                            <td>{{ item.N }}</td>
+                            :key="index">  
+                            <td>{{ item.id }}</td>                 
                             <td>{{ item.Thesis_No }}</td>
                             <td>{{ item.Thesis_Group }}</td>
                             <td>{{ item.Academic_Year }}</td>
@@ -124,7 +124,7 @@ const onDelete = async (N: number) => {
                             <td>{{ item.Year }}</td>
                             <td>{{ item.Batch }}</td>
                             <td>{{ item.Session }}</td>
-                            <td>{{ item.Organizaition }}</td>
+                            <!-- <td>{{ item.Organizaition }}</td>
                             <td>{{ item.Organization_Type }}</td>
                             <td>{{ item.Location }}</td>
                             <td>{{ item.Organization_Phone }}</td>
@@ -133,22 +133,22 @@ const onDelete = async (N: number) => {
                             <td>{{ item.Objective }}</td>
                             <td>{{ item.Objective_Khmer }}</td>
                             <td>{{ item.Summary }}</td>
-                            <td>{{ item.Submit_Date }}</td>
+                            <td>{{ item.Submit_Date }}</td> -->
                             <td>{{ item.Teacher_id }}</td>
-                            <td>{{ item.Defend_Date }}</td>
+                            <!-- <td>{{ item.Defend_Date }}</td> -->
                             <td>{{ item.Book_Score }}</td>
-                            <td>{{ item.Defend_time }}</td>
+                            <!-- <td>{{ item.Defend_time }}</td>
                             <td>{{ item.Submit_book }}</td>
                             <td>{{ item.Building }}</td>
-                            <td>{{ item.Room }}</td>                          
+                            <td>{{ item.Room }}</td>  -->                         
                             <td>
                                 <Link 
-                                    :href="route('thesis.edit', item.N)"
+                                    :href="route('thesis.edit', item.id)"
                                     class="btn btn-warning mr-2">Edit
                                 </Link>
                                 <button 
                                     type="button"
-                                    @click="onDelete(item.N)"
+                                    @click="onDelete(item.id)"
                                     class="btn btn-error">
                                     Delete
                                 </button>

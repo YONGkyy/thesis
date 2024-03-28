@@ -9,11 +9,12 @@ class ThesisCommittee extends Model
 {
     use HasFactory;
     protected $table = 'thesis_committee';
-    protected $primaryKey = 'Academic_Year';
-    protected $fillable = [  
-        'Department',
+    protected $fillable = [
+        'Academic_Year',
         'Major',
-        'Committee',
+        'Committee', 
+        'Department',
         'Subject',
     ];
+    
 }

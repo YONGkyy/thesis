@@ -9,7 +9,6 @@ class Thesis extends Model
 {
     use HasFactory;
     protected $table = 'thesis';
-    protected $primaryKey = 'N';
     protected $fillable = [       
         'Thesis_No',
         'Thesis_Group',

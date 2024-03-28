@@ -12,17 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('thesis_detail', function (Blueprint $table) {
-            $table->integer('Thesis_No')->primary();
+            $table->id();
+            $table->integer('Thesis_No');
             $table->string('Student_ID');
             $table->string('Phone')->nullable();
             $table->string('Defend')->nullable();
             $table->string('Pass_State')->nullable();
             $table->string('Issue_Tem_Certificate')->nullable();
-            $table->string('other')->nullable();
-            $table->float('hardwork')->nullable()->default(0);
-            $table->float('charateristic')->nullable()->default(0);
-            $table->string('remark')->nullable();
-            $table->string('result')->nullable();
+            $table->string('Other')->nullable();
+            $table->float('Hardwork')->nullable()->default(0);
+            $table->float('Charateristic')->nullable()->default(0);
+            $table->string('Remark')->nullable();
+            $table->string('Result')->nullable();
 
             $table->timestamps();
         });

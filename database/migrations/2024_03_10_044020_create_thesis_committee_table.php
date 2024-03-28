@@ -13,15 +13,17 @@ return new class extends Migration
     {
         Schema::create('thesis_committee', function (Blueprint $table) {
             $table->id();
-            $table->string('Academic_year');
+
+            $table->string('Academic_Year');
             $table->string('Major');
             $table->string('Committee');
+            $table->unique(['Academic_Year', 'Major', 'Committee']);
+
             $table->string('Department')->nullable();
             $table->string('Subject')->nullable();
+            
             $table->timestamps();
 
-            // Creating a composite unique key
-            $table->unique(['Academic_year', 'Major', 'Committee'], 'composite_key');
         });
     }
 

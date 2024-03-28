@@ -10,165 +10,82 @@ use Inertia\Inertia;
 
 class ThesisController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $thesises = Thesis::query()
-            // ->with(['Teacher_id']) 
-
             ->when($request->input('keyword'), fn ($query)
             =>$query->where('Department', 'like', "%" . $request->input('keyword') . "%"))
 
-            // ->when($request->input('Teacher_id'), fn ($query)
-            // =>$query->where('Teacher_id', $request->input('Teacher_id')))
+            ->paginate(5)
+            ->withQueryString();  
 
-            ->paginate(3)
-            ->withQueryString();
-
-        // $thesisesAdvisors = ThesisAdvisor::query()
-        //     ->select('n', 'Advisor')
-        //     ->orderBy('Advisor')  
-        //     ->get();  
-    
         return Inertia::render('Thesis/Index', [
             'thesises' => $thesises,
-            // 'thesisAdvisors' => $thesisesAdvisors,
             'filters' => $request->all(
-                // 'n',
                 'keyword'
             ),
         ]);
     }
     
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        // $thesisesAdvisors = ThesisAdvisor::query()
-        //     ->select('n', 'Advisor')
-        //     ->orderBy('Advisor')  
-        //     ->get();
-        return Inertia::render('Thesis/Create', [
-            // 'thesisAdvisors' => $thesisesAdvisors,
-        ]);
+        return Inertia::render('Thesis/Create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
 
     public function store(Request $request)
     {
-        // Validate the incoming request data
         $validatedData = $request->validate([
-            // Define validation rules for each field if needed
-            'N' => 'nullable',
             'Thesis_No' => 'required',
-            'Thesis_Group' =>  'required',
-            'Academic_Year' => 'required',
-            'Department' => 'required',
-            'Major' => 'required',
-            'Year' => 'required',
-            'Batch' => 'required',
-            'Session' => 'required',
-            'Organizaition' => 'required',
-            'Organization_Type' => 'required',
-            'Location' => 'required',
-            'Organization_Phone' => 'required',
-            'Title' => 'required',
-            'Title_Khmer' => 'required',
-            'Objective' => 'required',
-            'Objective_Khmer' => 'required',
-            'Summary' => 'required',
-            'Submit_Date' => 'required',
-            // 'Teacher_id' => 'required|exists:thesisAdvisors,n',
-            'Teacher_id' => 'required',
-            'Defend_Date' => 'required',
-            'Book_Score' => 'required',
-            'Defend_time' => 'required',
-            'Submit_book' => 'required',
-            'Building' => 'required',
-            'Room' => 'required',            
+            'Thesis_Group' =>  'nullable',
+            'Academic_Year' => 'nullable',
+            'Department' => 'nullable',
+            'Major' => 'nullable',
+            'Year' => 'nullable',
+            'Batch' => 'nullable',
+            'Session' => 'nullable',
+            'Organizaition' => 'nullable',
+            'Organization_Type' => 'nullable',
+            'Location' => 'nullable',
+            'Organization_Phone' => 'nullable',
+            'Title' => 'nullable',
+            'Title_Khmer' => 'nullable',
+            'Objective' => 'nullable',
+            'Objective_Khmer' => 'nullable',
+            'Summary' => 'nullable',
+            'Submit_Date' => 'nullable',
+            'Teacher_id' => 'nullable',
+            'Defend_Date' => 'nullable',
+            'Book_Score' => 'nullable',
+            'Defend_time' => 'nullable',
+            'Submit_book' => 'nullable',
+            'Building' => 'nullable',
+            'Room' => 'nullable',            
         ]);
 
-        $thesis = new Thesis();
-
-        $thesis->N = $validatedData['N'];
-        $thesis->Thesis_No = $validatedData['Thesis_No'];
-        $thesis->Thesis_Group = $validatedData['Thesis_Group'];
-        $thesis->Academic_Year = $validatedData['Academic_Year'];
-        $thesis->Department = $validatedData['Department'];
-        $thesis->Major = $validatedData['Major'];
-        $thesis->Year = $validatedData['Year'];
-        $thesis->Batch = $validatedData['Batch'];
-        $thesis->Session = $validatedData['Session'];
-        $thesis->Organizaition = $validatedData['Organizaition'];
-        $thesis->Organization_Type = $validatedData['Organization_Type'];
-        $thesis->Location = $validatedData['Location'];
-        $thesis->Organization_Phone = $validatedData['Organization_Phone'];
-        $thesis->Title = $validatedData['Title'];
-        $thesis->Title_Khmer = $validatedData['Title_Khmer'];
-        $thesis->Objective = $validatedData['Objective'];
-        $thesis->Objective_Khmer = $validatedData['Objective_Khmer'];
-        $thesis->Summary = $validatedData['Summary'];
-        $thesis->Submit_Date = $validatedData['Submit_Date'];
-        $thesis->Teacher_id = $validatedData['Teacher_id'];
-        $thesis->Defend_Date = $validatedData['Defend_Date'];
-        $thesis->Book_Score = $validatedData['Book_Score'];
-        $thesis->Defend_time = $validatedData['Defend_time'];
-        $thesis->Submit_book = $validatedData['Submit_book'];
-        $thesis->Building = $validatedData['Building'];
-        $thesis->Room = $validatedData['Room'];
-
-        $thesis->save();
-
-        if($request->input('N')){
-            $thesises = Thesis::findOrFail($request->input("N"));
+        if($request->input('id')){
+            $thesises = Thesis::findOrFail($request->input("id"));
             $thesises->update($validatedData);
         }else {      
             Thesis::create($validatedData);
         }
         return redirect()->route("thesis.index");
     }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Thesis $thesis)
-    {
-        // $thesisesAdvisors = ThesisAdvisor::query()
-        //     ->select('n', 'Advisor')
-        //     ->orderBy('Advisor')  
-        //     ->get();    
+    {    
         return Inertia::render('Thesis/Create', [
             'thesis' => $thesis, 
-            // 'thesisAdvisors' => $thesisesAdvisors
         ]);
     }
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $N)
+    public function update(Request $request, string $id)
     {  
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Thesis $thesis)
+    public function destroy($id)
     {
+        $thesis = Thesis::findOrFail($id);
         $thesis->delete();
         return redirect()->back();
     }

@@ -9,11 +9,11 @@ const props = defineProps<{
     thesisAdvisor?: ThesisAdvisorType;
 }>();
 const form = useForm({
-    Academic_year: props.thesisAdvisor?.Academic_year ?? "",
-    n: props.thesisAdvisor?.n ?? "",
+    id: props.thesisAdvisor?.id ?? "",
+    Academic_Year: props.thesisAdvisor?.Academic_Year ?? "",
+    Advisor: props.thesisAdvisor?.Advisor ?? "",
     College: props.thesisAdvisor?.College ?? "",
     Department: props.thesisAdvisor?.Department ?? "",
-    Advisor: props.thesisAdvisor?.Advisor ?? "",
 });
 const onSave = () => {
     form.post(route("thesisAdvisor.store"), {
@@ -44,21 +44,22 @@ const onSave = () => {
                     <div class="flex flex-col gap-2 lg:flex-row">
 
                         <div class="flex flex-col w-full">
-                            <label class="label">Academic_year</label>
-                            <input v-model="form.Academic_year" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.Academic_year }" />
-                            <div v-if="form.errors.Academic_year" class="text-error">
-                                {{ form.errors.Academic_year }}
+                            <label class="label">Academic_Year</label>
+                            <input v-model="form.Academic_Year" class="input input-primary w-full"
+                                :class="{ 'input-error': form.errors.Academic_Year }" />
+                            <div v-if="form.errors.Academic_Year" class="text-error">
+                                {{ form.errors.Academic_Year }}
                             </div>
                         </div>
                         <div class="flex flex-col w-full">
-                            <label class="label">N</label>
-                            <input v-model="form.n" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.n }" />
-                            <div v-if="form.errors.n" class="text-error">
-                                {{ form.errors.n }}
+                            <label class="label">Advisor</label>
+                            <input v-model="form.Advisor" class="input input-primary w-full"
+                                :class="{ 'input-error': form.errors.Advisor }" />
+                            <div v-if="form.errors.Advisor" class="text-error">
+                                {{ form.errors.Advisor }}
                             </div>
                         </div>
+
                         <div class="flex flex-col w-full">
                             <label class="label">College</label>
                             <input v-model="form.College" class="input input-primary w-full"
@@ -73,14 +74,6 @@ const onSave = () => {
                                 :class="{ 'input-error': form.errors.Department }" />
                             <div v-if="form.errors.Department" class="text-error">
                                 {{ form.errors.Department }}
-                            </div>
-                        </div>
-                        <div class="flex flex-col w-full">
-                            <label class="label">Advisor</label>
-                            <input v-model="form.Advisor" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.Advisor }" />
-                            <div v-if="form.errors.Advisor" class="text-error">
-                                {{ form.errors.Advisor }}
                             </div>
                         </div>
                     </div>
