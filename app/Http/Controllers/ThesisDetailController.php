@@ -41,22 +41,6 @@ class ThesisDetailController extends Controller
             "Result" => "required",
         ]);
 
-        // $thesisDetail = new ThesisDetail();
-
-        // $thesisDetail->Thesis_No = $validatedData['Thesis_No'];
-        // $thesisDetail->Student_ID = $validatedData['Student_ID'];
-        // $thesisDetail->Phone = $validatedData['Phone'];
-        // $thesisDetail->Defend = $validatedData['Defend'];
-        // $thesisDetail->Pass_State = $validatedData['Pass_State'];
-        // $thesisDetail->Issue_Tem_Certificate = $validatedData['Issue_Tem_Certificate'];
-        // $thesisDetail->Other = $validatedData['Other'];
-        // $thesisDetail->Hardwork = $validatedData['Hardwork'];
-        // $thesisDetail->Charateristic = $validatedData['Charateristic'];
-        // $thesisDetail->Remark = $validatedData['Remark'];
-        // $thesisDetail->Result = $validatedData['Result'];
-
-        // $thesisDetail->save();
-
         if($request->input('id')){
             $thesisDetails = ThesisDetail::findOrFail($request->input("id"));
             $thesisDetails->update($validatedData);
@@ -81,7 +65,6 @@ class ThesisDetailController extends Controller
     {
         //
     }
-
     public function destroy($id)
     {
         $thesisDetail = ThesisDetail::findOrFail($id);

@@ -67,68 +67,45 @@ const onDelete = async (id: number) => {
                 <h2 class="text-2xl font-bold">Thesis Management</h2>
                 <div class="mt-4">
                     <div class="bg-base-100 p-2 rounded-xl flex gap-2 items-center">
-                        <Link :href="route('thesis.create')" class="btn btn-info">New</Link>
+                        <Link :href="route('thesis.create')" class="btn btn-primary">New</Link>
                         <input 
                             v-model="filterForm.keyword"
                             type="text" 
                             placeholder="Search..." 
-                            class="input input-info w-full"/>
+                            class="input input-primary w-full"/>
 
                         <button class="btn btn-warning" type="button" @click="onClearFilter">Clear</button>
                     </div>
                 </div>
             </div>
             <div class="bg-base-100 rounded-xl overflow-x-auto">
-                <table class="table table-lg ">
-                    <thead class="bg-blue-800 text-white">
+                <table class="table table-lg">
+                    <thead>
                         <tr>
                             <th>ID</th>
-<<<<<<< HEAD
-                            <th>Thesis No</th>
-                            <th>Thesis Group</th>
-                            <!-- <th>Academic Year</th>
-=======
                             <th>Thesis_No</th>
                             <th>Thesis_Group</th>
                             <th>Academic_Year</th>
->>>>>>> yong
                             <th>Department</th>
                             <th>Major</th>
                             <th>Year</th>
                             <th>Batch</th>
-<<<<<<< HEAD
-                            <th>Session</th> -->
-                            <th>Organizaition</th>
-                            <!-- <th>Organization Type</th>
-                            <th>Organization Location</th>
-                            <th>Organization Phone</th> -->
-=======
                             <th>Session</th>
                             <!-- <th>Organizaition</th>
                             <th>Organization_Type</th>
                             <th>Location</th>
                             <th>Organization_Phone</th>
->>>>>>> yong
                             <th>Title</th>
-                            <!-- <th>Title Khmer</th>
+                            <th>Title_Khmer</th>
                             <th>Objective</th>
-                            <th>Objective Khmer</th> -->
+                            <th>Objective_Khmer</th>
                             <th>Summary</th>
-<<<<<<< HEAD
-                            <th>Submit Date</th>
-                            <th>Teacher id</th>
-                            <!-- <th>Defend Date</th>
-                            <th>Book Score</th>
-                            <th>Defend time</th>
-                            <th>Submit book</th> -->
-=======
                             <th>Submit_Date</th> -->
                             <th>Teacher_id</th>
                             <!-- <th>Defend_Date</th> -->
                             <th>Book_Score</th>
                             <!-- <th>Defend_time</th>
                             <th>Submit_book</th>
->>>>>>> yong
                             <th>Building</th>
                             <th>Room</th> -->
                             <th>Actions</th>
@@ -141,35 +118,19 @@ const onDelete = async (id: number) => {
                             <td>{{ item.id }}</td>                 
                             <td>{{ item.Thesis_No }}</td>
                             <td>{{ item.Thesis_Group }}</td>
-                            <!-- <td>{{ item.Academic_Year }}</td>
+                            <td>{{ item.Academic_Year }}</td>
                             <td>{{ item.Department }}</td>
                             <td>{{ item.Major }}</td>
                             <td>{{ item.Year }}</td>
                             <td>{{ item.Batch }}</td>
-<<<<<<< HEAD
-                            <td>{{ item.Session }}</td> -->
-                            <td>{{ item.Organizaition }}</td>
-                            <!-- <td>{{ item.Organization_Type }}</td>
-=======
                             <td>{{ item.Session }}</td>
                             <!-- <td>{{ item.Organizaition }}</td>
                             <td>{{ item.Organization_Type }}</td>
->>>>>>> yong
                             <td>{{ item.Location }}</td>
-                            <td>{{ item.Organization_Phone }}</td> -->
+                            <td>{{ item.Organization_Phone }}</td>
                             <td>{{ item.Title }}</td>
-                            <!-- <td>{{ item.Title_Khmer }}</td>
+                            <td>{{ item.Title_Khmer }}</td>
                             <td>{{ item.Objective }}</td>
-<<<<<<< HEAD
-                            <td>{{ item.Objective_Khmer }}</td>-->
-                            <td>{{ item.Summary }}</td> 
-                            <td>{{ item.Submit_Date }}</td>
-                            <td>{{ item.Teacher_id }}</td>
-                            <!-- <td>{{ item.Defend_Date }}</td>
-                            <td>{{ item.Book_Score }}</td>
-                            <td>{{ item.Defend_time }}</td>
-                            <td>{{ item.Submit_book }}</td> -->
-=======
                             <td>{{ item.Objective_Khmer }}</td>
                             <td>{{ item.Summary }}</td>
                             <td>{{ item.Submit_Date }}</td> -->
@@ -178,7 +139,6 @@ const onDelete = async (id: number) => {
                             <td>{{ item.Book_Score }}</td>
                             <!-- <td>{{ item.Defend_time }}</td>
                             <td>{{ item.Submit_book }}</td>
->>>>>>> yong
                             <td>{{ item.Building }}</td>
                             <td>{{ item.Room }}</td>  -->                         
                             <td>
@@ -205,7 +165,7 @@ const onDelete = async (id: number) => {
                         v-for="link in thesises.links" 
                         :href="link.url ?? '#'"
                         class="join-item btn"
-                        :class="{ 'btn-info': link.active }">
+                        :class="{ 'btn-primary': link.active }">
                         <span v-html="link.label"></span>
                     </Link>
                 </div>

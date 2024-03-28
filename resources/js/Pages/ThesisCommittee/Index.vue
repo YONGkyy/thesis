@@ -11,7 +11,6 @@ const props = defineProps<{
     thesisCommittee?: ThesisCommitteeType
     thesisCommittees: PaginateType<ThesisCommitteeType>
     filters?: {
-<<<<<<< HEAD
         keyword: string;
     }
 }>();   
@@ -23,6 +22,7 @@ const form = useForm({
     Committee: props.thesisCommittee?.Committee ?? "",
     Subject: props.thesisCommittee?.Subject ?? "",
 });
+
 
 const onSave = () => {
     form.post(route("thesisCommittee.store"), {
@@ -37,11 +37,6 @@ const onSave = () => {
         },
     });
 };
-=======
-        keyword: string;      
-    };
-}>();
->>>>>>> yong
 
 const filterForm = useForm({
     keyword: props.filters?.keyword ?? "",
@@ -178,13 +173,10 @@ const onDelete = async (id: number) => {
                 <table class="table table-lg">
                     <thead>
                         <tr>
-<<<<<<< HEAD
                             <th>Academic Year</th>
                             <th>Department</th>
-=======
                             <th>ID</th>
                             <th>Academic_Year</th>
->>>>>>> yong
                             <th>Major</th>
                             <th>Committee</th>
                             <th>Department</th>

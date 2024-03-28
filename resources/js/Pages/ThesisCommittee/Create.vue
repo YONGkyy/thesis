@@ -45,20 +45,15 @@ const onSave = () => {
         <div class="p-3">
             <h2 class="text-2xl font-bold">Create a ThesisCommittee</h2>
             <div class="mt-4">
-<<<<<<< HEAD
-                
-=======
                 <div class="bg-base-100 p-2 rounded-xl">
                     <Link :href="route('thesisCommittee.index')" class="btn btn-warning">
                     <MoveLeft class="w-5 h-5" />Back</Link>
                 </div>
->>>>>>> yong
             </div>
             <div class='mt-4 p-4 bg-base-100 rounded-xl'>
                 <form @submit.prevent="onSave">
                     <div class="flex flex-col gap-2 lg:flex-row">
                         <div class="flex flex-col w-full">
-<<<<<<< HEAD
                             <!-- <label class="label">Academic year</label> -->
                             <input 
                             type="text" 
@@ -76,13 +71,12 @@ const onSave = () => {
                             className="input input-bordered input-info w-full max-w-xs" />
                             <div v-if="form.errors.Department" class="text-error">
                                 {{ form.errors.Department }}
-=======
                             <label class="label">Academic_Year</label>
                             <input v-model="form.Academic_Year" class="input input-primary w-full"
                                 :class="{ 'input-error': form.errors.Academic_Year }" />
                             <div v-if="form.errors.Academic_Year" class="text-error">
                                 {{ form.errors.Academic_Year }}
->>>>>>> yong
+
                             </div>
                         </div>
                         <div class="flex flex-col w-full">
@@ -106,13 +100,11 @@ const onSave = () => {
                             </div>
                         </div>
                         <div class="flex flex-col w-full">
-<<<<<<< HEAD
                             <!-- <label class="label">Subject</label> -->
                             <input 
                             type="text" 
                             placeholder="Subject" 
                             className="input input-bordered input-info w-full max-w-xs" />
-=======
                             <label class="label">Department</label>
                             <input v-model="form.Department" class="input input-primary w-full"
                                 :class="{ 'input-error': form.errors.Department }" />
@@ -124,7 +116,6 @@ const onSave = () => {
                             <label class="label">Subject</label>
                             <input v-model="form.Subject" class="input input-primary w-full"
                                 :class="{ 'input-error': form.errors.Subject }" />
->>>>>>> yong
                             <div v-if="form.errors.Subject" class="text-error">
                                 {{ form.errors.Subject }}
                             </div>

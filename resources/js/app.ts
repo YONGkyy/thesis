@@ -1,17 +1,12 @@
-import './bootstrap';
 import '../css/app.css';
+import './bootstrap';
 
-import { createApp, h, DefineComponent } from 'vue';
-import { createInertiaApp, Link} from '@inertiajs/vue3';
+import { Link, createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import { DefineComponent, createApp, h } from 'vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 // import Heading from './Components/Heading.vue';
-import { createPinia} from 'pinia';
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { fas } from "@fortawesome/free-solid-svg-icons";
-import { fab } from "@fortawesome/free-brands-svg-icons";
-import { library } from '@fortawesome/fontawesome-svg-core';
-library.add(fas, fab);
+import { createPinia } from 'pinia';
 
 
 const pinia = createPinia();
@@ -25,7 +20,6 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue)
             .use(pinia)
-            .component("font-awesome-icon", FontAwesomeIcon)
             // .component('Heading', Heading)
             .component('Link', Link)
             .mount(el);

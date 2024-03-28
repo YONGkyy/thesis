@@ -23,11 +23,11 @@ const form = useForm({
     Defend: props.thesisDetail?.Defend ?? "",
     Pass_State: props.thesisDetail?.Pass_State ?? "",
     Issue_Tem_Certificate: props.thesisDetail?.Issue_Tem_Certificate ?? "",
-    other: props.thesisDetail?.other ?? "",
-    hardwork: props.thesisDetail?.hardwork ?? "",
-    charateristic: props.thesisDetail?.charateristic ?? "",
-    remark: props.thesisDetail?.remark ?? "",
-    result: props.thesisDetail?.result ?? "",
+    Other: props.thesisDetail?.Other ?? "",
+    Hardwork: props.thesisDetail?.Hardwork ?? "",
+    Charateristic: props.thesisDetail?.Charateristic ?? "",
+    Remark: props.thesisDetail?.Remark ?? "",
+    Result: props.thesisDetail?.Result ?? "",
 
 });
 const onSave = () => {
@@ -43,10 +43,6 @@ const onSave = () => {
         },
     });
 };
-
-
-
-
 
 const filterForm = useForm({
     keyword: props.filters?.keyword ?? "",
@@ -168,24 +164,24 @@ const onDelete = async (id: number) => {
                             <label class="label">Charateristic</label>
                             <input type="text" placeholder="" 
                             className="input input-bordered input-info w-full max-w-xs" />
-                            <div v-if="form.errors.charateristic" class="text-error">
-                                {{ form.errors.charateristic }}
+                            <div v-if="form.errors.Charateristic" class="text-error">
+                                {{ form.errors.Charateristic }}
                             </div>
                         </div>
                         <div class="flex flex-col w-full">
                             <label class="label">Remark</label>
                             <input type="text" placeholder="" 
                             className="input input-bordered input-info w-full max-w-xs" />
-                            <div v-if="form.errors.remark" class="text-error">
-                                {{ form.errors.remark }}
+                            <div v-if="form.errors.Remark" class="text-error">
+                                {{ form.errors.Remark }}
                             </div>
                         </div>
                         <div class="flex flex-col w-full">
                             <label class="label">Result</label>
                             <input type="text" placeholder="" 
                             className="input input-bordered input-info w-full max-w-xs" />
-                            <div v-if="form.errors.result" class="text-error">
-                                {{ form.errors.result }}
+                            <div v-if="form.errors.Result" class="text-error">
+                                {{ form.errors.Result }}
                             </div>
                         </div>
                     </div>
@@ -194,22 +190,19 @@ const onDelete = async (id: number) => {
                         <div class="flex flex-col w-full">
                             <label class="label">Other</label>
                             <textarea className="textarea textarea-info" placeholder=""></textarea>
-                            <div v-if="form.errors.other" class="text-error">
-                                {{ form.errors.other }}
+                            <div v-if="form.errors.Other" class="text-error">
+                                {{ form.errors.Other }}
                             </div>
                         </div>
                         
                         <div class="flex flex-col w-full">
                             <label class="label">Hardwork</label>
                             <textarea className="textarea textarea-info" placeholder=""></textarea>
-                            <div v-if="form.errors.hardwork" class="text-error">
-                                {{ form.errors.hardwork }}
+                            <div v-if="form.errors.Hardwork" class="text-error">
+                                {{ form.errors.Hardwork }}
                             </div>
                         </div>
                     </div>
-
-
-                   
                     <div class="mt-2 flex justify-end">
                         <button type="submit" class="btn btn-success">Save</button>
                     </div>
@@ -238,14 +231,6 @@ const onDelete = async (id: number) => {
                 <table class="table table-lg">
                     <thead>
                         <tr>
-<<<<<<< HEAD
-                            <th>Thesis No</th>
-                            <th>Student ID</th>
-                            <th>Phone</th>
-                            <th>Defend</th>
-                            <th>Pass State</th>
-                            <th>Issue Tem Certificate</th>
-=======
                             <th>ID</th>
                             <th>Thesis_No</th>
                             <th>Student_ID</th>
@@ -253,7 +238,6 @@ const onDelete = async (id: number) => {
                             <th>Defend</th>
                             <th>Pass_State</th>
                             <th>Issue_Tem_Certificate</th>
->>>>>>> yong
                             <th>Other</th>
                             <th>Hardwork</th>
                             <th>Charateristic</th>

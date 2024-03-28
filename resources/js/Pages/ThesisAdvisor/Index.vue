@@ -16,11 +16,11 @@ const props = defineProps<{
 }>();
 
 const form = useForm({
-    Academic_year: props.thesisAdvisor?.Academic_year ?? "",
-    n: props.thesisAdvisor?.n ?? "",
+    id: props.thesisAdvisor?.id ?? "",
+    Academic_Year: props.thesisAdvisor?.Academic_Year ?? "",
+    Advisor: props.thesisAdvisor?.Advisor ?? "",
     College: props.thesisAdvisor?.College ?? "",
     Department: props.thesisAdvisor?.Department ?? "",
-    Advisor: props.thesisAdvisor?.Advisor ?? "",
 });
 const onSave = () => {
     form.post(route("thesisAdvisor.store"), {
@@ -83,12 +83,12 @@ const onDelete = async (id: number) => {
     });
 };
 </script>
+
 <template>
      <App>
         <div class="p-3">
             <h2 class="text-2xl font-bold">Create a ThesisAdvisor</h2>
-            <div class="mt-4">
-               
+            <div class="mt-4">              
             </div>
             <div class='mt-4 p-4 bg-base-100 rounded-xl'>
                 <form @submit.prevent="onSave">
@@ -100,24 +100,26 @@ const onDelete = async (id: number) => {
                             type="text" 
                             placeholder="Academic Year" 
                             className="input input-bordered input-info w-full max-w-xs" />
-                            <!-- <input v-model="form.Academic_year" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.Academic_year }" /> -->
-                            <div v-if="form.errors.Academic_year" class="text-error">
-                                {{ form.errors.Academic_year }}
+                            <!-- <input v-model="form.Academic_Year" class="input input-primary w-full"
+                                :class="{ 'input-error': form.errors.Academic_Year }" /> -->
+                            <div v-if="form.errors.Academic_Year" class="text-error">
+                                {{ form.errors.Academic_Year }}
                             </div>
                         </div>
+                        
                         <div class="flex flex-col w-full">
-                            <!-- <label class="label">ID</label> -->
+                            <!-- <label class="label">Advisor</label> -->
                             <input 
                             type="text" 
-                            placeholder="ID" 
+                            placeholder="Advisor" 
                             className="input input-bordered input-info w-full max-w-xs" />
-                            <!-- <input v-model="form.n" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.n }" /> -->
-                            <div v-if="form.errors.n" class="text-error">
-                                {{ form.errors.n }}
+                            <!-- <input v-model="form.Advisor" class="input input-primary w-full"
+                                :class="{ 'input-error': form.errors.Advisor }" /> -->
+                            <div v-if="form.errors.Advisor" class="text-error">
+                                {{ form.errors.Advisor }}
                             </div>
                         </div>
+
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">College</label> -->
                             <input 
@@ -142,18 +144,7 @@ const onDelete = async (id: number) => {
                                 {{ form.errors.Department }}
                             </div>
                         </div>
-                        <div class="flex flex-col w-full">
-                            <!-- <label class="label">Advisor</label> -->
-                            <input 
-                            type="text" 
-                            placeholder="Advisor" 
-                            className="input input-bordered input-info w-full max-w-xs" />
-                            <!-- <input v-model="form.Advisor" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.Advisor }" /> -->
-                            <div v-if="form.errors.Advisor" class="text-error">
-                                {{ form.errors.Advisor }}
-                            </div>
-                        </div>
+
                     </div>
                     <div class="mt-2 flex justify-end">
                         <button type="submit" class="btn btn-success">Save</button>
@@ -161,9 +152,7 @@ const onDelete = async (id: number) => {
 
                 </form>
             </div>
-        </div>
-    
-    
+        </div>  
         <div class="p-3">
             <div class="mb-2">
                 <h2 class="text-2xl font-bold">ThesisAdvisor Management</h2>
@@ -184,14 +173,9 @@ const onDelete = async (id: number) => {
                 <table class="table table-2xl">
                     <thead>
                         <tr>
-<<<<<<< HEAD
-                            <th>Academic Year</th>
-                            <th>ID</th>
-=======
                             <th>Id</th>
                             <th>Academic_Year</th>
                             <th>Advisor</th>
->>>>>>> yong
                             <th>College</th>
                             <th>Department</th>
                             <th>Actions</th>
