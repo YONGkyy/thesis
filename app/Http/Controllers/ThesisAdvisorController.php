@@ -29,6 +29,7 @@ class ThesisAdvisorController extends Controller
 
     public function store(Request $request)
     {
+
         // Validate the incoming request data
         $validatedData = $request->validate([
             "Academic_Year" => "required",
@@ -36,6 +37,7 @@ class ThesisAdvisorController extends Controller
             "College" =>  "required",
             "Department" => "required",
         ]);
+
 
         // // // Create a new Thesis instance
         // $thesisAdvisor = new ThesisAdvisor();
@@ -52,6 +54,7 @@ class ThesisAdvisorController extends Controller
             $thesisAdvisors = ThesisAdvisor::findOrFail($request->input("id"));
             $thesisAdvisors->update($validatedData);
         }else {      
+
             ThesisAdvisor::create($validatedData);
         }
         return redirect()->route('thesisAdvisor.index');

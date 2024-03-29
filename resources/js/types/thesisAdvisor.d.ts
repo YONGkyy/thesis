@@ -1,5 +1,4 @@
 export interface ThesisAdvisorType {
-    id: number;
     Academic_Year: string;
     Advisor: string;
     College: string;

@@ -16,13 +16,13 @@ const props = defineProps<{
 }>();
 
 const form = useForm({
-    id: props.thesisAdvisor?.id ?? "",
     Academic_Year: props.thesisAdvisor?.Academic_Year ?? "",
     Advisor: props.thesisAdvisor?.Advisor ?? "",
     College: props.thesisAdvisor?.College ?? "",
     Department: props.thesisAdvisor?.Department ?? "",
 });
 const onSave = () => {
+    // console.log(form.data());
     form.post(route("thesisAdvisor.store"), {
         onSuccess: () => {
             Swal.fire({
@@ -98,6 +98,7 @@ const onDelete = async (id: number) => {
                             <!-- <label class="label">Academic year</label> -->
                             <input 
                             type="text" 
+                            v-model="form.Academic_Year"
                             placeholder="Academic Year" 
                             className="input input-bordered input-info w-full max-w-xs" />
                             <!-- <input v-model="form.Academic_Year" class="input input-primary w-full"
@@ -111,6 +112,7 @@ const onDelete = async (id: number) => {
                             <!-- <label class="label">Advisor</label> -->
                             <input 
                             type="text" 
+                            v-model="form.Advisor"
                             placeholder="Advisor" 
                             className="input input-bordered input-info w-full max-w-xs" />
                             <!-- <input v-model="form.Advisor" class="input input-primary w-full"
@@ -124,6 +126,7 @@ const onDelete = async (id: number) => {
                             <!-- <label class="label">College</label> -->
                             <input 
                             type="text" 
+                            v-model="form.College"
                             placeholder="College" 
                             className="input input-bordered input-info w-full max-w-xs" />
                             <!-- <input v-model="form.College" class="input input-primary w-full"
@@ -136,6 +139,7 @@ const onDelete = async (id: number) => {
                             <!-- <label class="label">Department</label> -->
                             <input 
                             type="text" 
+                            v-model="form.Department"
                             placeholder="Department" 
                             className="input input-bordered input-info w-full max-w-xs" />
                             <!-- <input v-model="form.Department" class="input input-primary w-full"
