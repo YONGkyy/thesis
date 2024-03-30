@@ -4,7 +4,6 @@ export interface ThesisAdvisorType {
     Advisor: string;
     College: string;
     Department: string;
-
     created_at: string;
     updated_at: string;
 }

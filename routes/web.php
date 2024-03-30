@@ -9,7 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\RedirectToDashbordIfLoggedIn;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function(){
+Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 
@@ -18,8 +18,25 @@ Route::middleware('checkAuth')->group(function () {
     // // thesis
     Route::resource('/thesis', ThesisController::class);
 
-    // thesisAdvisor
-    Route::resource('/thesisAdvisor', ThesisAdvisorController::class);
+    // // thesisAdvisor
+    // Route::resource('/thesisAdvisor', ThesisAdvisorController::class);
+    Route::prefix('/thesisAdvisor')->controller(ThesisAdvisorController::class)
+        ->name('thesisAdvisor.')
+        ->group(function () {
+            // list all thesisAdvisor
+            Route::get('/', 'index')->name('index');
+            // create new thesisAdvisor
+            Route::get('/create', 'create')->name('create');
+            //edit thesisAdvisor
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            //store new thesisAdvisor
+            Route::post('/store/{id?}', 'store')->name('store');
+            //update thesisAdvisor
+            Route::put('/update/{id}', 'update')->name('update');
+            //destroy thesisAdvisor
+            Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+        });
+
 
     // thesisCommittee
     Route::resource('/thesisCommittee', ThesisCommitteeController::class);
@@ -32,7 +49,6 @@ Route::middleware('checkAuth')->group(function () {
 
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
 });
 
 // show login page
