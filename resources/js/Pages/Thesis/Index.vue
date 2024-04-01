@@ -68,10 +68,10 @@ const onDelete = async (id: number) => {
                 <div class="mt-4">
                     <div class="bg-base-100 p-2 rounded-xl flex gap-2 items-center">
                         <Link :href="route('thesis.create')" class="btn btn-primary">New</Link>
-                        <input 
+                        <input
                             v-model="filterForm.keyword"
-                            type="text" 
-                            placeholder="Search..." 
+                            type="text"
+                            placeholder="Search..."
                             class="input input-primary w-full"/>
 
                         <button class="btn btn-warning" type="button" @click="onClearFilter">Clear</button>
@@ -113,9 +113,9 @@ const onDelete = async (id: number) => {
                     </thead>
                     <tbody>
                         <tr
-                            v-for="(item, index) in thesises.data" 
-                            :key="index">  
-                            <td>{{ item.id }}</td>                 
+                            v-for="(item, index) in thesises.data"
+                            :key="index">
+                            <td>{{ item.id }}</td>
                             <td>{{ item.Thesis_No }}</td>
                             <td>{{ item.Thesis_Group }}</td>
                             <td>{{ item.Academic_Year }}</td>
@@ -140,13 +140,13 @@ const onDelete = async (id: number) => {
                             <!-- <td>{{ item.Defend_time }}</td>
                             <td>{{ item.Submit_book }}</td>
                             <td>{{ item.Building }}</td>
-                            <td>{{ item.Room }}</td>  -->                         
+                            <td>{{ item.Room }}</td>  -->
                             <td>
-                                <Link 
+                                <Link
                                     :href="route('thesis.edit', item.id)"
                                     class="btn btn-warning mr-2">Edit
                                 </Link>
-                                <button 
+                                <button
                                     type="button"
                                     @click="onDelete(item.id)"
                                     class="btn btn-error">
@@ -161,15 +161,15 @@ const onDelete = async (id: number) => {
             <!-- Pagination -->
             <div class="bg-base-100 rounded-xl mt-2 flex justify-center p-2">
                 <div class="join">
-                    <Link 
-                        v-for="link in thesises.links" 
+                    <Link
+                        v-for="link in thesises.links"
                         :href="link.url ?? '#'"
                         class="join-item btn"
                         :class="{ 'btn-primary': link.active }">
                         <span v-html="link.label"></span>
                     </Link>
                 </div>
-                
+
             </div>
         </div>
     </App>
