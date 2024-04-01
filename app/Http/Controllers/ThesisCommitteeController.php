@@ -42,7 +42,7 @@ class ThesisCommitteeController extends Controller
         if($request->input('id')){
             $thesisCommittees = ThesisCommittee::findOrFail($request->input("id"));
             $thesisCommittees->update($validatedData);
-        }else {      
+        }else {
             ThesisCommittee::create($validatedData);
         }
         return redirect()->route('thesisCommittee.index');
@@ -68,6 +68,6 @@ class ThesisCommitteeController extends Controller
     {
         $thesisCommittee = ThesisCommittee::findOrFail($id);
         $thesisCommittee->delete();
-        return redirect()->back();  
+        return redirect()->back();
     }
 }
