@@ -13,7 +13,7 @@ const props = defineProps<{
     filters?: {
         keyword: string;
     }
-}>();   
+}>();
 
 const form = useForm({
     Academic_year: props.thesisCommittee?.Academic_Year ?? "",
@@ -89,16 +89,16 @@ const onDelete = async (id: number) => {
         <div class="p-3">
             <h2 class="text-2xl font-bold">Create a ThesisCommittee</h2>
             <div class="mt-4">
-                
+
             </div>
             <div class='mt-4 p-4 bg-base-100 rounded-xl'>
                 <form @submit.prevent="onSave">
                     <div class="flex flex-col gap-2 lg:flex-row">
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">Academic year</label> -->
-                            <input 
-                            type="text" 
-                            placeholder="Academic Year" 
+                            <input
+                            type="text"
+                            placeholder="Academic Year"
                             className="input input-bordered input-info w-full max-w-xs" />
                             <div v-if="form.errors.Academic_year" class="text-error">
                                 {{ form.errors.Academic_year }}
@@ -106,9 +106,9 @@ const onDelete = async (id: number) => {
                         </div>
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">Department</label> -->
-                            <input 
-                            type="text" 
-                            placeholder="Department" 
+                            <input
+                            type="text"
+                            placeholder="Department"
                             className="input input-bordered input-info w-full max-w-xs" />
                             <div v-if="form.errors.Department" class="text-error">
                                 {{ form.errors.Department }}
@@ -116,9 +116,9 @@ const onDelete = async (id: number) => {
                         </div>
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">Major</label> -->
-                            <input 
-                            type="text" 
-                            placeholder="Major" 
+                            <input
+                            type="text"
+                            placeholder="Major"
                             className="input input-bordered input-info w-full max-w-xs" />
                             <div v-if="form.errors.Major" class="text-error">
                                 {{ form.errors.Major }}
@@ -126,9 +126,9 @@ const onDelete = async (id: number) => {
                         </div>
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">Committee</label> -->
-                            <input 
-                            type="text" 
-                            placeholder="Committee" 
+                            <input
+                            type="text"
+                            placeholder="Committee"
                             className="input input-bordered input-info w-full max-w-xs" />
                             <div v-if="form.errors.Committee" class="text-error">
                                 {{ form.errors.Committee }}
@@ -136,9 +136,9 @@ const onDelete = async (id: number) => {
                         </div>
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">Subject</label> -->
-                            <input 
-                            type="text" 
-                            placeholder="Subject" 
+                            <input
+                            type="text"
+                            placeholder="Subject"
                             className="input input-bordered input-info w-full max-w-xs" />
                             <div v-if="form.errors.Subject" class="text-error">
                                 {{ form.errors.Subject }}
@@ -159,10 +159,10 @@ const onDelete = async (id: number) => {
                 <div class="mt-4">
                     <div class="bg-base-100 p-2 rounded-xl flex gap-2 items-center">
                         <!-- <Link :href="route('thesisCommittee.create')" class="btn btn-primary">New</Link> -->
-                        <input 
+                        <input
                             v-model="filterForm.keyword"
-                            type="text" 
-                            placeholder="Search..." 
+                            type="text"
+                            placeholder="Search..."
                             class="input input-info w-full"/>
 
                         <button class="btn btn-warning" type="button" @click="onClearFilter">Clear</button>
@@ -195,11 +195,11 @@ const onDelete = async (id: number) => {
                             <td>{{ item.Department }}</td>
                             <td>{{ item.Subject }}</td>
                             <td>
-                                <Link 
+                                <Link
                                     :href="route('thesisCommittee.edit', item.id)"
                                     class="btn btn-warning mr-2">Edit
                                 </Link>
-                                <button 
+                                <button
                                     type="button"
                                     @click="onDelete(item.id)"
                                     class="btn btn-error">
@@ -214,15 +214,15 @@ const onDelete = async (id: number) => {
             <!-- Pagination -->
             <div class="bg-base-100 rounded-xl mt-2 flex justify-center p-2">
                 <div class="join">
-                    <Link 
-                        v-for="link in thesisCommittees.links" 
+                    <Link
+                        v-for="link in thesisCommittees.links"
                         :href="link.url ?? '#'"
                         class="join-item btn"
                         :class="{ 'btn-info': link.active }">
                         <span v-html="link.label"></span>
                     </Link>
                 </div>
-                
+
             </div>
         </div>
     </App>
