@@ -42,11 +42,10 @@ const onSave = () => {
         onSuccess: () => {
             Swal.fire({
                 icon: "success",
-                title: "Advisor has been saved.",
-                timer: 2000,
+                title: "ThesisAdvisor has been saved.",
+                timer: 3000,
                 position: "top-end",
                 toast: true,
-                showConfirmButton: false,
             });
         },
     });
@@ -90,25 +89,15 @@ const onDelete = (id: number) => {
                     Swal.fire({
                         icon: "success",
                         text: "Deleted successfully!",
-                        title: "Advisor has been deleted.",
+                        title: "thesisAdvisor has been deleted.",
                         toast: true,
-                        position: "top-end",
-                        timer: 2000,
-                        showConfirmButton: false,
+                        timer: 3000,
                     });
                 },
             });
         }
     });
 };
-<<<<<<< HEAD
-
-const onEdit = (id: number) => {
-    router.get(route("thesisAdvisor.edit", id));
-    form.Academic_Year = props.thesisAdvisor?.Academic_Year ?? "";
-    form.Advisor = props.thesisAdvisor?.Advisor ?? "";
-    form.Department = props.thesisAdvisor?.Department ?? "";
-=======
 const onEdit = async (id: number) => {
     const { data } = await axios.get(route("thesisAdvisor.edit", id));
     form.Academic_Year = data.Academic_Year;
@@ -120,90 +109,16 @@ const onEdit = async (id: number) => {
 
 const oncloseModal = () => {
     onModal.value = false;
->>>>>>> yong
 };
 </script>
 
 <template>
-<<<<<<< HEAD
-    <App>
-=======
     <Modal :show="onModal" maxWidth="2xl">
->>>>>>> yong
         <div class="p-3">
             <h2 class="text-2xl font-bold">Create a ThesisAdvisor</h2>
             <div class="mt-4"></div>
             <div class="mt-4 p-4 bg-base-100 rounded-xl">
                 <form @submit.prevent="onSave">
-<<<<<<< HEAD
-                    <div class="flex flex-col gap-2 lg:flex-row">
-                        <div class="flex flex-col w-full">
-                            <!-- <label class="label">Academic year</label> -->
-                            <input
-                                type="text"
-                                v-model="form.Academic_Year"
-                                placeholder="Academic Year"
-                                className="input input-bordered input-info w-full max-w-xs"
-                            />
-                            <!-- <input v-model="form.Academic_Year" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.Academic_Year }" /> -->
-                            <div
-                                v-if="form.errors.Academic_Year"
-                                class="text-error"
-                            >
-                                {{ form.errors.Academic_Year }}
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col w-full">
-                            <!-- <label class="label">Advisor</label> -->
-                            <input
-                                type="text"
-                                v-model="form.Advisor"
-                                placeholder="Advisor"
-                                className="input input-bordered input-info w-full max-w-xs"
-                            />
-                            <!-- <input v-model="form.Advisor" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.Advisor }" /> -->
-                            <div v-if="form.errors.Advisor" class="text-error">
-                                {{ form.errors.Advisor }}
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col w-full">
-                            <!-- <label class="label">College</label> -->
-                            <input
-                                type="text"
-                                v-model="form.College"
-                                placeholder="College"
-                                className="input input-bordered input-info w-full max-w-xs"
-                            />
-                            <!-- <input v-model="form.College" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.College }" /> -->
-                            <div v-if="form.errors.College" class="text-error">
-                                {{ form.errors.College }}
-                            </div>
-                        </div>
-                        <div class="flex flex-col w-full">
-                            <!-- <label class="label">Department</label> -->
-                            <input
-                                type="text"
-                                v-model="form.Department"
-                                placeholder="Department"
-                                className="input input-bordered input-info w-full max-w-xs"
-                            />
-                            <!-- <input v-model="form.Department" class="input input-primary w-full"
-                                :class="{ 'input-error': form.errors.Department }" /> -->
-                            <div
-                                v-if="form.errors.Department"
-                                class="text-error"
-                            >
-                                {{ form.errors.Department }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-2 flex justify-end">
-=======
                     <div class="flex flex-col w-full">
                         <div>
                             <div class="flex flex-col w-full">
@@ -288,7 +203,6 @@ const oncloseModal = () => {
                         <button class="btn btn-warning" @click="oncloseModal">
                             Close
                         </button>
->>>>>>> yong
                         <button type="submit" class="btn btn-success">
                             {{ form.isDirty ? 'Update' : 'Save' }}
                         </button>
@@ -296,11 +210,8 @@ const oncloseModal = () => {
                 </form>
             </div>
         </div>
-<<<<<<< HEAD
-=======
     </Modal>
     <App>
->>>>>>> yong
         <div class="p-3">
             <div class="mb-2">
                 <h2 class="text-2xl font-bold">ThesisAdvisor Management</h2>
@@ -308,19 +219,6 @@ const oncloseModal = () => {
                     <div
                         class="bg-base-100 p-2 rounded-xl flex gap-2 items-center"
                     >
-<<<<<<< HEAD
-                        <!-- <Link :href="route('thesisAdvisor.create')" class="btn btn-info">New</Link> -->
-                        <input
-                            v-model="filterForm.keyword"
-                            type="text"
-<<<<<<< HEAD
-                            placeholder="Search by Academic_Year...."
-=======
-                            placeholder="Search..."
->>>>>>> yong
-                            class="input input-info w-full"
-                        />
-=======
                         <button class="btn btn-primary" @click="onOpenModal">
                             New
                         </button>
@@ -363,7 +261,6 @@ const oncloseModal = () => {
                                 {{ departments }}
                             </option>
                         </select>
->>>>>>> yong
 
                         <button
                             class="btn btn-warning"
@@ -392,11 +289,7 @@ const oncloseModal = () => {
                             v-for="(item, index) in thesisAdvisors.data"
                             :key="index"
                         >
-<<<<<<< HEAD
-                            <td>{{ item.id }}</td>
-=======
                             <td>{{ index + 1 }}</td>
->>>>>>> yong
                             <td>{{ item.Academic_Year }}</td>
                             <td>{{ item.Advisor }}</td>
                             <td>{{ item.College }}</td>
@@ -425,11 +318,7 @@ const oncloseModal = () => {
             <!-- Pagination -->
             <div class="bg-base-100 rounded-xl mt-2 flex justify-center p-2">
                 <div class="join">
-<<<<<<< HEAD
-                    <Link
-=======
                     <b
->>>>>>> yong
                         v-for="link in thesisAdvisors.links"
                         :href="link.url ?? '#'"
                         class="join-item btn"

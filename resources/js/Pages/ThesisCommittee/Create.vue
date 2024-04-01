@@ -13,7 +13,7 @@ const props = defineProps<{
     filters?: {
         keyword: string;
     }
-}>();   
+}>();
 
 const form = useForm({
     id: props.thesisCommittee?.id ?? "",
@@ -55,9 +55,9 @@ const onSave = () => {
                     <div class="flex flex-col gap-2 lg:flex-row">
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">Academic year</label> -->
-                            <input 
-                            type="text" 
-                            placeholder="Academic Year" 
+                            <input
+                            type="text"
+                            placeholder="Academic Year"
                             className="input input-bordered input-info w-full max-w-xs" />
                             <div v-if="form.errors.Academic_year" class="text-error">
                                 {{ form.errors.Academic_year }}
@@ -65,9 +65,9 @@ const onSave = () => {
                         </div>
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">Department</label> -->
-                            <input 
-                            type="text" 
-                            placeholder="Department" 
+                            <input
+                            type="text"
+                            placeholder="Department"
                             className="input input-bordered input-info w-full max-w-xs" />
                             <div v-if="form.errors.Department" class="text-error">
                                 {{ form.errors.Department }}
@@ -81,9 +81,9 @@ const onSave = () => {
                         </div>
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">Major</label> -->
-                            <input 
-                            type="text" 
-                            placeholder="Major" 
+                            <input
+                            type="text"
+                            placeholder="Major"
                             className="input input-bordered input-info w-full max-w-xs" />
                             <div v-if="form.errors.Major" class="text-error">
                                 {{ form.errors.Major }}
@@ -91,9 +91,9 @@ const onSave = () => {
                         </div>
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">Committee</label> -->
-                            <input 
-                            type="text" 
-                            placeholder="Committee" 
+                            <input
+                            type="text"
+                            placeholder="Committee"
                             className="input input-bordered input-info w-full max-w-xs" />
                             <div v-if="form.errors.Committee" class="text-error">
                                 {{ form.errors.Committee }}
@@ -101,9 +101,9 @@ const onSave = () => {
                         </div>
                         <div class="flex flex-col w-full">
                             <!-- <label class="label">Subject</label> -->
-                            <input 
-                            type="text" 
-                            placeholder="Subject" 
+                            <input
+                            type="text"
+                            placeholder="Subject"
                             className="input input-bordered input-info w-full max-w-xs" />
                             <label class="label">Department</label>
                             <input v-model="form.Department" class="input input-primary w-full"
