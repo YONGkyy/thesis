@@ -11,16 +11,27 @@ class ThesisAdvisorController extends Controller
 
     public function index()
     {
-        //
-        $thesisAdvisors = ThesisAdvisor::query()
+        // $thesisAdvisors = ThesisAdvisor::query()
+        //     ->orderBy('Academic_Year', 'desc')
+        //     ->when(request()->input('academic_year'), fn ($query) =>
+        //     $query->where('Academic_Year', request()->input('academic_year')))
+        //     ->when(request()->input('advisor'), fn ($query) =>
+        //     $query->where('Advisor', request()->input('advisor')))
+        //     ->when(request()->input('department'), fn ($query) =>
+        //     $query->where('Department', request()->input('department')))
+        //     ->paginate(2);
+        $query = ThesisAdvisor::query()
             ->orderBy('Academic_Year', 'desc')
-            ->when(request()->input('academic_year'), fn ($query)
-            =>$query->where('Academic_Year', request()->input('academic_year')))
+            ->when(request()->input('academic_year'), fn ($query) =>
+            $query->where('Academic_Year', request()->input('academic_year')))
             ->when(request()->input('advisor'), fn ($query) =>
             $query->where('Advisor', request()->input('advisor')))
             ->when(request()->input('department'), fn ($query) =>
-            $query->where('Department', request()->input('department')))
-            ->paginate(5);
+            $query->where('Department', request()->input('department')));
+
+        $thesisAdvisors = $query->paginate(2);
+
+
         $academic_years = ThesisAdvisor::query()
             ->selectRaw('Academic_Year')
             ->distinct()
@@ -39,7 +50,7 @@ class ThesisAdvisorController extends Controller
             ->orderBy('Department', 'asc')
             ->pluck('Department');
 
-
+        // return $thesisAdvisors;
 
         return Inertia::render('ThesisAdvisor/Index', [
             'thesisAdvisors' => $thesisAdvisors,
@@ -49,6 +60,8 @@ class ThesisAdvisorController extends Controller
             'filters' => request()->all('academic_year', 'advisor', 'department')
         ]);
     }
+
+
     public function create()
     {
         return Inertia::render('ThesisAdvisor/Index');
@@ -59,21 +72,22 @@ class ThesisAdvisorController extends Controller
         // Validate the incoming request data
         $validatedData = $request->validate([
             "Academic_Year" => "required",
-            "Advisor" =>  "required",
+            "Advisor" => "required",
             "College" =>  "required",
             "Department" => "required",
         ]);
 
-        if ($id) {
-            $thesisAdvisor = ThesisAdvisor::findOrFail($id);
-            $thesisAdvisor->update($validatedData);
-        } else {
-            ThesisAdvisor::create($validatedData);
-        }
+        $data = [
+            "Academic_Year" => $request->input('Academic_Year'),
+            "Advisor" => $request->input('Advisor'),
+            "College" => $request->input('College'),
+            "Department" => $request->input('Department'),
+        ];
+        // If $id is provided, update the existing record; otherwise, create a new record
+        $thesisAdvisor = ThesisAdvisor::updateOrCreate(['id' => $id], $data);
 
         return redirect()->route('thesisAdvisor.index');
     }
-
 
     public function edit(string $id)
     {

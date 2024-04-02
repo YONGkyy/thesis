@@ -3,12 +3,12 @@ import App from "@/Layouts/App.vue";
 import { PaginateType } from "@/types/paginateType";
 import { ThesisAdvisorType } from "@/types/thesisAdvisor";
 import { router, useForm } from "@inertiajs/vue3";
-import { pickBy, throttle, values } from "lodash";
+import { pickBy, throttle } from "lodash";
 import Swal from "sweetalert2";
 import { watch } from "vue";
 import Modal from "@/Components/Modal.vue";
-import axios from "axios";
 import { ref } from "vue";
+import axios from "axios";
 
 const props = defineProps<{
     thesisAdvisor?: ThesisAdvisorType;
@@ -24,6 +24,7 @@ const props = defineProps<{
 }>();
 
 const form = useForm({
+    id: props.thesisAdvisor?.id ?? null,
     Academic_Year: props.thesisAdvisor?.Academic_Year ?? "",
     Advisor: props.thesisAdvisor?.Advisor ?? "",
     College: props.thesisAdvisor?.College ?? "",
@@ -32,24 +33,23 @@ const form = useForm({
 
 const onModal = ref(false);
 
-const onOpenModal = () => {
+const openModal = () => {
     onModal.value = true;
 };
 
 const onSave = () => {
-    // console.log(form.data());
-    form.post(route("thesisAdvisor.store"), {
+    form.post(route("thesisAdvisor.store", form.id ?? "update"), {
         onSuccess: () => {
             Swal.fire({
                 icon: "success",
                 title: "ThesisAdvisor has been saved.",
-                timer: 3000,
+                timer: 1500,
                 position: "top-end",
                 toast: true,
             });
         },
     });
-    form.reset();
+    oncloseModal();
 };
 
 const filterForm = useForm({
@@ -76,10 +76,11 @@ const onClearFilter = () => {
 const onDelete = (id: number) => {
     Swal.fire({
         title: "Do you want to delete?",
+        icon: "warning",
         showDenyButton: false,
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
         confirmButtonText: "Delete",
         denyButtonText: "Cancel",
     }).then((result) => {
@@ -89,9 +90,11 @@ const onDelete = (id: number) => {
                     Swal.fire({
                         icon: "success",
                         text: "Deleted successfully!",
-                        title: "thesisAdvisor has been deleted.",
+                        title: "The Advisor has been deleted.",
+                        showConfirmButton: false,
                         toast: true,
-                        timer: 3000,
+                        timer: 1000,
+                        position: "top-end",
                     });
                 },
             });
@@ -100,24 +103,50 @@ const onDelete = (id: number) => {
 };
 const onEdit = async (id: number) => {
     const { data } = await axios.get(route("thesisAdvisor.edit", id));
+    form.id = data.id;
     form.Academic_Year = data.Academic_Year;
     form.Advisor = data.Advisor;
     form.College = data.College;
     form.Department = data.Department;
     onModal.value = true;
+    openModal();
 };
 
 const oncloseModal = () => {
-    onModal.value = false;
+    if (form.isDirty) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Do you want to close this form?",
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: "Yes",
+            denyButtonText: `No`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                onModal.value = false;
+                form.reset();
+            }
+        });
+    } else {
+        onModal.value = false;
+        form.reset();
+    }
 };
 </script>
 
 <template>
-    <Modal :show="onModal" maxWidth="2xl">
-        <div class="p-3">
-            <h2 class="text-2xl font-bold">Create a ThesisAdvisor</h2>
-            <div class="mt-4"></div>
-            <div class="mt-4 p-4 bg-base-100 rounded-xl">
+    <Modal :show="onModal" maxWidth="2xl" @close="oncloseModal">
+        <div class="p-3 bg-base-200 rounded-xl">
+            <div class="text-center mt-2">
+                <h2 class="text-2xl font-bold">
+                    {{
+                        form.id
+                            ? "Thesis Advisor Update"
+                            : "Thesis Advisor Create"
+                    }}
+                </h2>
+            </div>
+            <div class="p-4 rounded-xl">
                 <form @submit.prevent="onSave">
                     <div class="flex flex-col w-full">
                         <div>
@@ -126,7 +155,6 @@ const oncloseModal = () => {
                                 <input
                                     type="text"
                                     v-model="form.Academic_Year"
-                                    placeholder="Academic Year"
                                     class="input input-primary w-full"
                                     :class="{
                                         'input-error':
@@ -146,7 +174,6 @@ const oncloseModal = () => {
                                 <input
                                     type="text"
                                     v-model="form.Advisor"
-                                    placeholder="Advisor"
                                     class="input input-primary w-full"
                                     :class="{
                                         'input-error': form.errors.Advisor,
@@ -166,7 +193,6 @@ const oncloseModal = () => {
                                 <input
                                     type="text"
                                     v-model="form.College"
-                                    placeholder="College"
                                     class="input input-primary w-full"
                                     :class="{
                                         'input-error': form.errors.College,
@@ -184,7 +210,6 @@ const oncloseModal = () => {
                                 <input
                                     type="text"
                                     v-model="form.Department"
-                                    placeholder="Department"
                                     class="input input-primary w-full"
                                     :class="{
                                         'input-error': form.errors.Department,
@@ -199,12 +224,16 @@ const oncloseModal = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="mt-2 flex justify-end gap-3">
-                        <button class="btn btn-warning" @click="oncloseModal">
+                    <div class="mt-3 flex justify-end gap-4">
+                        <button
+                            type="button"
+                            class="btn btn-warning"
+                            @click="oncloseModal"
+                        >
                             Close
                         </button>
                         <button type="submit" class="btn btn-success">
-                            {{ form.isDirty ? 'Update' : 'Save' }}
+                            {{ form.id ? "Update" : "Save" }}
                         </button>
                     </div>
                 </form>
@@ -219,7 +248,7 @@ const oncloseModal = () => {
                     <div
                         class="bg-base-100 p-2 rounded-xl flex gap-2 items-center"
                     >
-                        <button class="btn btn-primary" @click="onOpenModal">
+                        <button class="btn btn-primary" @click="openModal">
                             New
                         </button>
 
@@ -318,14 +347,14 @@ const oncloseModal = () => {
             <!-- Pagination -->
             <div class="bg-base-100 rounded-xl mt-2 flex justify-center p-2">
                 <div class="join">
-                    <b
+                    <Link
                         v-for="link in thesisAdvisors.links"
                         :href="link.url ?? '#'"
                         class="join-item btn"
                         :class="{ 'btn-info': link.active }"
                     >
                         <span v-html="link.label"></span>
-                    </b>
+                    </Link>
                 </div>
             </div>
         </div>

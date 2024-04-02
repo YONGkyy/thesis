@@ -31,8 +31,6 @@ Route::middleware('checkAuth')->group(function () {
             Route::get('/edit/{id}', 'edit')->name('edit');
             //store new thesisAdvisor
             Route::post('/store/{id?}', 'store')->name('store');
-            //update thesisAdvisor
-            Route::put('/update/{id}', 'update')->name('update');
             //destroy thesisAdvisor
             Route::delete('/destroy/{id}', 'destroy')->name('destroy');
         });

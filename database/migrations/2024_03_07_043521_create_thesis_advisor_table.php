@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('thesis_advisor', function (Blueprint $table) {
             $table->id();
-
             $table->string('Academic_Year');
             $table->string('Advisor');
             $table->unique(['Academic_Year', 'Advisor']);
