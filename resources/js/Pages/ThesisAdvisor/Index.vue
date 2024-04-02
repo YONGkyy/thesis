@@ -58,19 +58,42 @@ const filterForm = useForm({
     department: props.filters?.department ?? "",
 });
 
+// watch(
+//     () => filterForm.data(),
+//     throttle(() => {
+//         router.get(route("thesisAdvisor.index"), pickBy(filterForm.data()), {
+//             preserveState: true,
+//             only: ["thesisAdvisor"],
+//             replace: true,
+//         });
+//     }, 500),
+// );
+
+// const onClearFilter = () => {
+//     filterForm.reset();
+// };
+
 watch(
     () => filterForm.data(),
     throttle(() => {
-        router.get(route("thesisAdvisor.index"), pickBy(filterForm.data()), {
-            preserveState: true,
-            only: ["thesisAdvisor"],
-            replace: true,
+        const filters = pickBy(filterForm.data());
+        const url = new URL(window.location.href);
+        Object.entries(filters).forEach(([key, value]) => {
+            if (value !== null && value !== "") {
+                url.searchParams.set(key, value);
+            } else {
+                url.searchParams.delete(key);
+            }
         });
+        router.replace(url.pathname + url.search); // Update the router with the new URL
     }, 500),
 );
 
 const onClearFilter = () => {
     filterForm.reset();
+    const url = new URL(window.location.href);
+    url.search = ""; // Clear all query parameters
+    router.replace(url.pathname + url.search); // Update the router with the new URL
 };
 
 const onDelete = (id: number) => {
