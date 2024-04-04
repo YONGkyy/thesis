@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ThesisAdvisor;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -20,16 +21,25 @@ class ThesisAdvisorController extends Controller
         //     ->when(request()->input('department'), fn ($query) =>
         //     $query->where('Department', request()->input('department')))
         //     ->paginate(2);
-        $query = ThesisAdvisor::query()
+        $thesisAdvisors = ThesisAdvisor::query()
             ->orderBy('Academic_Year', 'desc')
-            ->when(request()->input('academic_year'), fn ($query) =>
-            $query->where('Academic_Year', request()->input('academic_year')))
-            ->when(request()->input('advisor'), fn ($query) =>
-            $query->where('Advisor', request()->input('advisor')))
-            ->when(request()->input('department'), fn ($query) =>
-            $query->where('Department', request()->input('department')));
+            ->when(
+                request()->input('academic_year'),
+                fn ($query) =>
+                $query->where('Academic_Year', request()->input('academic_year'))
+            )
+            ->when(
+                request()->input('advisor'),
+                fn ($query) =>
+                $query->where('Advisor', request()->input('advisor'))
+            )
+            ->when(
+                request()->input('department'),
+                fn ($query) =>
+                $query->where('Department', request()->input('department'))
+            )->paginate(10);
 
-        $thesisAdvisors = $query->paginate(2);
+
 
 
         $academic_years = ThesisAdvisor::query()
@@ -57,7 +67,7 @@ class ThesisAdvisorController extends Controller
             'academic_options' => $academic_years,
             'advisor_options' => $advisors,
             'department_options' => $departments,
-            'filters' => request()->all('academic_year', 'advisor', 'department')
+            'filters' => request()->all('academic_year', 'advisor', 'department'),
         ]);
     }
 
@@ -69,6 +79,7 @@ class ThesisAdvisorController extends Controller
 
     public function store(Request $request, $id = null)
     {
+        // try {
         // Validate the incoming request data
         $validatedData = $request->validate([
             "Academic_Year" => "required",
@@ -87,6 +98,12 @@ class ThesisAdvisorController extends Controller
         $thesisAdvisor = ThesisAdvisor::updateOrCreate(['id' => $id], $data);
 
         return redirect()->route('thesisAdvisor.index');
+        // } catch (QueryException $e) {
+        //     if ($e->errorInfo[1] === 1062) { // 1062 is the MySQL error code for a duplicate entry
+        //         return redirect()->back()->withErrors(['Advisor' => 'The Advisor already exists.'])->withInput();
+        //     }
+        //     throw $e;
+        // }
     }
 
     public function edit(string $id)

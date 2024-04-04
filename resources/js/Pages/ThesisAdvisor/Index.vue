@@ -3,7 +3,7 @@ import App from "@/Layouts/App.vue";
 import { PaginateType } from "@/types/paginateType";
 import { ThesisAdvisorType } from "@/types/thesisAdvisor";
 import { router, useForm } from "@inertiajs/vue3";
-import { pickBy, throttle } from "lodash";
+import { pick, pickBy, throttle } from "lodash";
 import Swal from "sweetalert2";
 import { watch } from "vue";
 import Modal from "@/Components/Modal.vue";
@@ -24,18 +24,14 @@ const props = defineProps<{
 }>();
 
 const form = useForm({
-    id: props.thesisAdvisor?.id ?? null,
-    Academic_Year: props.thesisAdvisor?.Academic_Year ?? "",
-    Advisor: props.thesisAdvisor?.Advisor ?? "",
-    College: props.thesisAdvisor?.College ?? "",
-    Department: props.thesisAdvisor?.Department ?? "",
+    id: null,
+    Academic_Year: "",
+    Advisor: "",
+    College: "",
+    Department: "",
 });
 
-const onModal = ref(false);
-
-const openModal = () => {
-    onModal.value = true;
-};
+const onOpenModal = ref(false);
 
 const onSave = () => {
     form.post(route("thesisAdvisor.store", form.id ?? "update"), {
@@ -47,9 +43,11 @@ const onSave = () => {
                 position: "top-end",
                 toast: true,
             });
+            onOpenModal.value = false;
+            form.reset();
+            form.clearErrors();
         },
     });
-    oncloseModal();
 };
 
 const filterForm = useForm({
@@ -58,42 +56,18 @@ const filterForm = useForm({
     department: props.filters?.department ?? "",
 });
 
-// watch(
-//     () => filterForm.data(),
-//     throttle(() => {
-//         router.get(route("thesisAdvisor.index"), pickBy(filterForm.data()), {
-//             preserveState: true,
-//             only: ["thesisAdvisor"],
-//             replace: true,
-//         });
-//     }, 500),
-// );
-
-// const onClearFilter = () => {
-//     filterForm.reset();
-// };
-
 watch(
     () => filterForm.data(),
     throttle(() => {
-        const filters = pickBy(filterForm.data());
-        const url = new URL(window.location.href);
-        Object.entries(filters).forEach(([key, value]) => {
-            if (value !== null && value !== "") {
-                url.searchParams.set(key, value);
-            } else {
-                url.searchParams.delete(key);
-            }
+        router.get(route("thesisAdvisor.index"), pickBy(filterForm.data()), {
+            preserveState: true,
+            replace: true,
         });
-        router.replace(url.pathname + url.search); // Update the router with the new URL
     }, 500),
 );
 
 const onClearFilter = () => {
     filterForm.reset();
-    const url = new URL(window.location.href);
-    url.search = ""; // Clear all query parameters
-    router.replace(url.pathname + url.search); // Update the router with the new URL
 };
 
 const onDelete = (id: number) => {
@@ -131,8 +105,7 @@ const onEdit = async (id: number) => {
     form.Advisor = data.Advisor;
     form.College = data.College;
     form.Department = data.Department;
-    onModal.value = true;
-    openModal();
+    onOpenModal.value = true;
 };
 
 const oncloseModal = () => {
@@ -146,19 +119,21 @@ const oncloseModal = () => {
             denyButtonText: `No`,
         }).then((result) => {
             if (result.isConfirmed) {
-                onModal.value = false;
+                onOpenModal.value = false;
                 form.reset();
+                form.clearErrors();
             }
         });
     } else {
-        onModal.value = false;
+        onOpenModal.value = false;
         form.reset();
+        form.clearErrors();
     }
 };
 </script>
 
 <template>
-    <Modal :show="onModal" maxWidth="2xl" @close="oncloseModal">
+    <Modal :show="onOpenModal" maxWidth="2xl" @close="oncloseModal">
         <div class="p-3 bg-base-200 rounded-xl">
             <div class="text-center mt-2">
                 <h2 class="text-2xl font-bold">
@@ -267,14 +242,18 @@ const oncloseModal = () => {
         <div class="p-3">
             <div class="mb-2">
                 <h2 class="text-2xl font-bold">ThesisAdvisor Management</h2>
-                <div class="mt-4">
-                    <div
-                        class="bg-base-100 p-2 rounded-xl flex gap-2 items-center"
-                    >
-                        <button class="btn btn-primary" @click="openModal">
+                <div class="mt-2 bg-base-100 px-2 pb-2 rounded-xl flex gap-2">
+                    <div class="mt-auto">
+                        <button
+                            class="btn btn-primary align-bottom"
+                            @click="onOpenModal = true"
+                        >
                             New
                         </button>
+                    </div>
 
+                    <div class="flex flex-col w-full">
+                        <label class="label label-text">Academic Year</label>
                         <select
                             v-model="filterForm.academic_year"
                             class="select select-info w-full"
@@ -287,12 +266,15 @@ const oncloseModal = () => {
                                 {{ years }}
                             </option>
                         </select>
+                    </div>
 
+                    <div class="flex flex-col w-full">
+                        <label class="label label-text">Advisor Name</label>
                         <select
                             v-model="filterForm.advisor"
                             class="select select-info w-full"
                         >
-                            <option value="">All Advisor Name</option>
+                            <option value="">All Advisors</option>
                             <option
                                 v-for="advisors in advisor_options"
                                 :value="advisors"
@@ -300,12 +282,15 @@ const oncloseModal = () => {
                                 {{ advisors }}
                             </option>
                         </select>
+                    </div>
 
+                    <div class="flex flex-col w-full">
+                        <label class="label label-text">Department</label>
                         <select
                             v-model="filterForm.department"
                             class="select select-info w-full"
                         >
-                            <option value="">All Department Name</option>
+                            <option value="">All Departments</option>
                             <option
                                 v-for="departments in department_options"
                                 :value="departments"
@@ -313,7 +298,9 @@ const oncloseModal = () => {
                                 {{ departments }}
                             </option>
                         </select>
+                    </div>
 
+                    <div class="mt-auto">
                         <button
                             class="btn btn-warning"
                             type="button"
