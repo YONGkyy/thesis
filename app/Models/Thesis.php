@@ -9,7 +9,7 @@ class Thesis extends Model
 {
     use HasFactory;
     protected $table = 'thesis';
-    protected $fillable = [       
+    protected $fillable = [
         'Thesis_No',
         'Thesis_Group',
         'Academic_Year',
@@ -36,4 +36,8 @@ class Thesis extends Model
         'Building',
         'Room',
     ];
+    public function advisor()
+    {
+        return $this->belongsTo(ThesisAdvisor::class, 'id', 'id');
+    }
 }

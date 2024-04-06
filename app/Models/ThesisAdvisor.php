@@ -15,5 +15,8 @@ class ThesisAdvisor extends Model
         'College',
         'Department',
     ];
-    
+    public function thesis()
+    {
+        return $this->hasMany(Thesis::class, 'id');
+    }
 }

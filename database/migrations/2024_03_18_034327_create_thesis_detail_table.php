@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('Remark')->nullable();
             $table->string('Result')->nullable();
 
+            $table->foreign('Thesis_No')->references('Thesis_No')->on('thesis');
+
             $table->timestamps();
         });
     }

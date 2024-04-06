@@ -14,11 +14,15 @@ class ThesisController extends Controller
     {
         $thesises = Thesis::query()
             ->when($request->input('keyword'), fn ($query)
-            =>$query->where('Department', 'like', "%" . $request->input('keyword') . "%"))
-
+            => $query->where('Department', 'like', "%" . $request->input('keyword') . "%"))
             ->paginate(5)
-            ->withQueryString();  
+            ->withQueryString();
 
+
+        $advisors = ThesisAdvisor::query()
+            ->select('id', 'Advisor')
+            ->get();
+        return $advisors;
         return Inertia::render('Thesis/Index', [
             'thesises' => $thesises,
             'filters' => $request->all(
@@ -26,7 +30,7 @@ class ThesisController extends Controller
             ),
         ]);
     }
-    
+
     public function create()
     {
         return Inertia::render('Thesis/Create');
@@ -59,13 +63,13 @@ class ThesisController extends Controller
             'Defend_time' => 'nullable',
             'Submit_book' => 'nullable',
             'Building' => 'nullable',
-            'Room' => 'nullable',            
+            'Room' => 'nullable',
         ]);
 
-        if($request->input('id')){
+        if ($request->input('id')) {
             $thesises = Thesis::findOrFail($request->input("id"));
             $thesises->update($validatedData);
-        }else {      
+        } else {
             Thesis::create($validatedData);
         }
         return redirect()->route("thesis.index");
@@ -75,13 +79,13 @@ class ThesisController extends Controller
         //
     }
     public function edit(Thesis $thesis)
-    {    
+    {
         return Inertia::render('Thesis/Create', [
-            'thesis' => $thesis, 
+            'thesis' => $thesis,
         ]);
     }
     public function update(Request $request, string $id)
-    {  
+    {
     }
     public function destroy($id)
     {

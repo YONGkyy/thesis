@@ -79,8 +79,6 @@ class ThesisAdvisorController extends Controller
 
     public function store(Request $request, $id = null)
     {
-        // try {
-        // Validate the incoming request data
         $validatedData = $request->validate([
             "Academic_Year" => "required",
             "Advisor" => "required",
@@ -94,16 +92,9 @@ class ThesisAdvisorController extends Controller
             "College" => $request->input('College'),
             "Department" => $request->input('Department'),
         ];
-        // If $id is provided, update the existing record; otherwise, create a new record
         $thesisAdvisor = ThesisAdvisor::updateOrCreate(['id' => $id], $data);
 
         return redirect()->route('thesisAdvisor.index');
-        // } catch (QueryException $e) {
-        //     if ($e->errorInfo[1] === 1062) { // 1062 is the MySQL error code for a duplicate entry
-        //         return redirect()->back()->withErrors(['Advisor' => 'The Advisor already exists.'])->withInput();
-        //     }
-        //     throw $e;
-        // }
     }
 
     public function edit(string $id)

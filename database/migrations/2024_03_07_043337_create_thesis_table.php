@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('thesis', function (Blueprint $table) {
             $table->id();
-            $table->integer('Thesis_No');
+            $table->integer('Thesis_No')->unique();
             $table->integer('Thesis_Group')->nullable();
             $table->string('Academic_Year')->nullable();
             $table->string('Department')->nullable();
