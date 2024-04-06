@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('Academic_Year');
             $table->string('Advisor');
             $table->unique(['Academic_Year', 'Advisor']);
-
             $table->string('College')->nullable();
             $table->string('Department')->nullable();
 
